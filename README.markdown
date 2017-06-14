@@ -1,4 +1,6 @@
-A [Giter8][g8] template for ...!
+A [Giter8][g8] template for creating Scala Play! projects for HMRC digital
+
+There are templates for creating frontend, backend and public facing APIs
 
 Template license
 ----------------
