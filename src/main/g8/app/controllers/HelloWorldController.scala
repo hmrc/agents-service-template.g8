@@ -1,12 +1,13 @@
 package controllers
 
-import javax.inject.Inject
+import javax.inject._
 
+import play.api.mvc.{Action, AnyContent, Controller}
 
 @Singleton
-class HelloWorldController extends Controller {
-	
-	def helloWorld(): Action[AnyContent] = Action { 
-		Ok 
+class HelloWorldController @Inject() extends Controller {
+
+	def helloWorld(): Action[AnyContent] = Action {
+		Ok
 	}
 }
