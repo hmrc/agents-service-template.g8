@@ -7,21 +7,19 @@ import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import uk.gov.hmrc.play.http.HeaderCarrier
 
-import scala.concurrent.Future
-
-class HelloWorldControllerSpec extends PlaySpec with MockitoSugar with GuiceOneAppPerSuite with BeforeAndAfterEach {
+class HelloWorldControllerSpec extends PlaySpec with MockitoSugar with GuiceOneAppPerSuite {
 
   val mockHelloWorldController = new HelloWorldController()
-
 
   implicit val hc = new HeaderCarrier
 
   "HelloWorldController" should {
     "return Status: OK Body: empty" in {
-      val response = mockHelloWorldController.hello()(FakeRequest("GET", "/hello-world"))
+      val response = mockHelloWorldController.helloWorld()(FakeRequest("GET", "/hello-world"))
 
       status(response) mustBe OK
     }
   }
 }
+
 
