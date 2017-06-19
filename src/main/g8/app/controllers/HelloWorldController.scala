@@ -8,6 +8,6 @@ import play.api.mvc.{Action, AnyContent, Controller}
 class HelloWorldController @Inject() extends Controller {
 
 	def helloWorld(): Action[AnyContent] = Action {
-		Ok
+		Ok(views.html.pages.hello_world())
 	}
 }
