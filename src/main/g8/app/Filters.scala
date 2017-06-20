@@ -9,14 +9,14 @@ import net.ceedubs.ficus.Ficus._
 import play.api.http.DefaultHttpFilters
 import play.api.mvc._
 import play.api.{Configuration, Environment, Logger}
+import uk.gov.hmrc.auth.core.PlayAuthConnector
+import uk.gov.hmrc.auth.filter.{AuthorisationFilter, FilterConfig}
 import uk.gov.hmrc.play.audit.filters.AuditFilter
 import uk.gov.hmrc.play.audit.http.config.LoadAuditingConfig
 import uk.gov.hmrc.play.audit.http.connector.AuditConnector
-import uk.gov.hmrc.play.auth.controllers.AuthParamsControllerConfig
-import uk.gov.hmrc.play.auth.microservice.connectors.AuthConnector
-import uk.gov.hmrc.play.auth.microservice.filters.AuthorisationFilter
 import uk.gov.hmrc.play.config.RunMode
 import uk.gov.hmrc.play.config.inject.ServicesConfig
+import uk.gov.hmrc.play.http.ws._
 
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -57,16 +57,17 @@ class MicroserviceAuditConnector @Inject() extends AuditConnector with RunMode {
 }
 
 class MicroserviceAuthFilter @Inject()(implicit val mat: Materializer, configuration: Configuration,
-                              val authConnector: AuthConn,
-                              val authParamsConfig: AuthConfig) extends AuthorisationFilter {
-  override def controllerNeedsAuth(controllerName: String): Boolean = configuration.getBoolean(s"controllers.$controllerName.needsAuth").getOrElse(false)
+                                       val connector: AuthConn) extends AuthorisationFilter {
+  override def config: FilterConfig = FilterConfig(configuration.underlying.as[Config]("controllers"))
 }
 
-class AuthConn @Inject()(val environment: Environment) extends AuthConnector with ServicesConfig {
-  override def authBaseUrl: String = baseUrl("auth")
+class AuthConn @Inject()(val environment: Environment) extends PlayAuthConnector with ServicesConfig {
+  override val serviceUrl: String = baseUrl("auth")
+
+  override def http = WSHttp
 }
 
-class AuthConfig @Inject()(configuration: Configuration) extends AuthParamsControllerConfig {
-  override def controllerConfigs: Config = configuration.underlying.as[Config]("controllers")
+object WSHttp extends WSGet with WSPut with WSPost with WSDelete with WSPatch {
+  override val hooks = NoneRequired
 }
 
