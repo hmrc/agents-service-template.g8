@@ -56,11 +56,6 @@ class MicroserviceAuditConnector @Inject() extends AuditConnector with RunMode {
   override lazy val auditingConfig = LoadAuditingConfig(s"auditing")
 }
 
-class MicroserviceAuthFilter @Inject()(implicit val mat: Materializer, ec: ExecutionContext,
-					val authConnector: MicroserviceAuthConnector) extends AuthorisationFilter {
-
-}
-
 class MicroserviceAuthFilter @Inject()(implicit val mat: Materializer, configuration: Configuration,
                               val authConnector: AuthConn,
                               val authParamsConfig: AuthConfig) extends AuthorisationFilter {
