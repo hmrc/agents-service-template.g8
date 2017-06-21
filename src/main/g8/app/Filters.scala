@@ -19,6 +19,13 @@ import uk.gov.hmrc.play.http.ws._
 
 import scala.concurrent.{ExecutionContext, Future}
 
+/**
+  * Defines the filters that are added to the application by extending the default Play filters
+  * @param loggingFilter - used to log details of any http requests hitting the service
+  * @param auditFilter - used to call the datastream microservice and publish auditing events
+  * @param metricsFilter - used to collect metrics and statistics relating to the service
+  * @param authFilter - used to add authorisation to endpoints in the service if required
+  */
 class Filters @Inject()(loggingFilter: LoggingFilter, auditFilter: MicroserviceAuditFilter, metricsFilter: MetricsFilter,
                         authFilter: MicroserviceAuthFilter)
   extends DefaultHttpFilters(loggingFilter, auditFilter, metricsFilter, authFilter)
