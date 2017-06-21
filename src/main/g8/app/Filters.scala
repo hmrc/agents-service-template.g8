@@ -14,14 +14,13 @@ import uk.gov.hmrc.auth.filter.{AuthorisationFilter, FilterConfig}
 import uk.gov.hmrc.play.audit.filters.AuditFilter
 import uk.gov.hmrc.play.audit.http.config.LoadAuditingConfig
 import uk.gov.hmrc.play.audit.http.connector.AuditConnector
-import uk.gov.hmrc.play.config.RunMode
-import uk.gov.hmrc.play.config.inject.ServicesConfig
+import uk.gov.hmrc.play.config.inject.{DefaultServicesConfig, RunMode}
 import uk.gov.hmrc.play.http.ws._
 
 import scala.concurrent.{ExecutionContext, Future}
 
 class Filters @Inject()(loggingFilter: LoggingFilter, auditFilter: MicroserviceAuditFilter, metricsFilter: MetricsFilter,
-authFilter: MicroserviceAuthFilter)
+                        authFilter: MicroserviceAuthFilter)
   extends DefaultHttpFilters(loggingFilter, auditFilter, metricsFilter, authFilter)
 
 class LoggingFilter @Inject()(implicit val mat: Materializer, ec: ExecutionContext) extends Filter {
@@ -44,25 +43,25 @@ class LoggingFilter @Inject()(implicit val mat: Materializer, ec: ExecutionConte
 }
 
 class MicroserviceAuditFilter @Inject()(implicit val mat: Materializer, ec: ExecutionContext,
-                                        configuration: Configuration,
-                                        val auditConnector: MicroserviceAuditConnector) extends AuditFilter {
+                                        configuration: Configuration, val auditConnector: MicroserviceAuditConnector) extends AuditFilter {
 
   override def controllerNeedsAuditing(controllerName: String): Boolean = configuration.getBoolean(s"controllers.$controllerName.needsAuditing").getOrElse(true)
 
   override def appName: String = configuration.getString("appName").get
 }
 
-class MicroserviceAuditConnector @Inject() extends AuditConnector with RunMode {
+class MicroserviceAuditConnector @Inject()(val environment: Environment) extends AuditConnector with RunMode {
   override lazy val auditingConfig = LoadAuditingConfig(s"auditing")
 }
 
-class MicroserviceAuthFilter @Inject()(implicit val mat: Materializer, configuration: Configuration,
-                                       val connector: AuthConn) extends AuthorisationFilter {
+class MicroserviceAuthFilter @Inject()(implicit val mat: Materializer, ec: ExecutionContext,
+                                       configuration: Configuration, val connector: AuthConn) extends AuthorisationFilter {
   override def config: FilterConfig = FilterConfig(configuration.underlying.as[Config]("controllers"))
 }
 
-class AuthConn @Inject()(val environment: Environment) extends PlayAuthConnector with ServicesConfig {
-  override val serviceUrl: String = baseUrl("auth")
+class AuthConn @Inject()(defaultServicesConfig: DefaultServicesConfig) extends PlayAuthConnector {
+
+  override val serviceUrl: String = defaultServicesConfig.baseUrl("auth")
 
   override def http = WSHttp
 }
@@ -70,4 +69,5 @@ class AuthConn @Inject()(val environment: Environment) extends PlayAuthConnector
 object WSHttp extends WSGet with WSPut with WSPost with WSDelete with WSPatch {
   override val hooks = NoneRequired
 }
+
 
