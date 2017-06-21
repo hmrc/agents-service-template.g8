@@ -66,14 +66,13 @@ class MicroserviceAuthFilter @Inject()(implicit val mat: Materializer, ec: Execu
   override def config: FilterConfig = FilterConfig(configuration.underlying.as[Config]("controllers"))
 }
 
-class AuthConn @Inject()(defaultServicesConfig: DefaultServicesConfig) extends PlayAuthConnector {
+class AuthConn @Inject()(defaultServicesConfig: DefaultServicesConfig,
+			 val http: WsVerbs) extends PlayAuthConnector {
 
   override val serviceUrl: String = defaultServicesConfig.baseUrl("auth")
-
-  override def http = WSHttp
 }
 
-object WSHttp extends WSGet with WSPut with WSPost with WSDelete with WSPatch {
+class WsVerbs extends WSHttp {
   override val hooks = NoneRequired
 }
 
