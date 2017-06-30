@@ -4,7 +4,7 @@ lazy val root = (project in file("."))
   .settings(
     name := "$name$",
     organization := "uk.gov.hmrc",
-    scalaVersion := "2.12.1",
+    scalaVersion := "2.11.11",
     resolvers ++= Seq(
       Resolver.bintrayRepo("hmrc", "releases"),
       Resolver.jcenterRepo,
