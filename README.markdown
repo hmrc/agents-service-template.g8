@@ -1,6 +1,8 @@
 A [Giter8][g8] template for creating Scala Play projects for HMRC digital services
 
-To use the template you need to have SBT version of 0.13.13 or later
+* To use the template you need to have SBT version of 0.13.13 or later *
+Information to install this on linux can be found here: <br>
+[http://www.scala-sbt.org/0.13/docs/Installing-sbt-on-Linux.html]
 
 To create a template service:
 1. Locate to the directory where you want to create the template
