@@ -5,13 +5,6 @@ lazy val root = (project in file("."))
     name := "$name$",
     organization := "uk.gov.hmrc",
     scalaVersion := "2.11.11",
-    resolvers ++= Seq(
-      Resolver.bintrayRepo("hmrc", "releases"),
-      Resolver.jcenterRepo,
-      Resolver.url("hmrc-sbt-plugin-releases",
-        url("https://dl.bintray.com/hmrc/sbt-plugin-releases")
-      )(Resolver.ivyStylePatterns)
-    ),
     libraryDependencies ++= Seq(
       "uk.gov.hmrc" %% "play-config" % "4.3.0",
       "uk.gov.hmrc" %% "play-auditing" % "2.10.0",
