@@ -1,6 +1,6 @@
-->    /$name$   app.Routes
+->         /$name$               app.Routes
 
-->         /                          health.Routes
+->         /                     health.Routes
 
-GET        /admin/metrics             @com.kenshoo.play.metrics.MetricsController.metrics
+GET        /admin/metrics        @com.kenshoo.play.metrics.MetricsController.metrics
 

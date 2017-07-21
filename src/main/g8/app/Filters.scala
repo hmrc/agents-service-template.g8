@@ -8,11 +8,11 @@ import play.api.http.DefaultHttpFilters
 import play.api.{Configuration, Environment}
 import uk.gov.hmrc.auth.core.PlayAuthConnector
 import uk.gov.hmrc.auth.filter.{AuthorisationFilter, FilterConfig}
-import uk.gov.hmrc.play.audit.filters.AuditFilter
+import uk.gov.hmrc.play.audit.filters.{AuditFilter, FrontendAuditFilter}
 import uk.gov.hmrc.play.audit.http.config.LoadAuditingConfig
 import uk.gov.hmrc.play.audit.http.connector.AuditConnector
 import uk.gov.hmrc.play.config.inject.{DefaultServicesConfig, RunMode}
-import uk.gov.hmrc.play.http.logging.filters.LoggingFilter
+import uk.gov.hmrc.play.http.logging.filters.FrontendLoggingFilter
 import uk.gov.hmrc.play.http.ws._
 
 import scala.concurrent.ExecutionContext
@@ -25,20 +25,24 @@ import scala.concurrent.ExecutionContext
   * @param metricsFilter - used to collect metrics and statistics relating to the service
   * @param authFilter    - used to add authorisation to endpoints in the service if required
   */
-class Filters @Inject()(loggingFilter: LogFilter, auditFilter: MicroserviceAuditFilter, metricsFilter: MetricsFilter,
+class Filters @Inject()(loggingFilter: LoggingFilter, auditFilter: MicroserviceAuditFilter, metricsFilter: MetricsFilter,
                         authFilter: MicroserviceAuthFilter)
   extends DefaultHttpFilters(loggingFilter, auditFilter, metricsFilter, authFilter)
 
-class LogFilter @Inject()(implicit val mat: Materializer, configuration: Configuration) extends LoggingFilter {
+class LoggingFilter @Inject()(implicit val mat: Materializer, ec: ExecutionContext, configuration: Configuration) extends FrontendLoggingFilter {
   override def controllerNeedsLogging(controllerName: String): Boolean = configuration.getBoolean(s"controllers.$controllerName.needsLogging").getOrElse(true)
 }
 
 class MicroserviceAuditFilter @Inject()(implicit val mat: Materializer, ec: ExecutionContext,
-                                        configuration: Configuration, val auditConnector: MicroserviceAuditConnector) extends AuditFilter {
+                                        configuration: Configuration, val auditConnector: MicroserviceAuditConnector) extends FrontendAuditFilter {
+
+  override lazy val maskedFormFields = Seq("password")
 
   override def controllerNeedsAuditing(controllerName: String): Boolean = configuration.getBoolean(s"controllers.$controllerName.needsAuditing").getOrElse(true)
 
   override def appName: String = configuration.getString("appName").get
+
+  override def applicationPort: Option[Int] = None
 }
 
 class MicroserviceAuditConnector @Inject()(val environment: Environment) extends AuditConnector with RunMode {
@@ -59,6 +63,3 @@ class AuthConn @Inject()(defaultServicesConfig: DefaultServicesConfig,
 class WsVerbs extends WSHttp {
   override val hooks = NoneRequired
 }
-
-
-
