@@ -20,6 +20,7 @@ lazy val root = (project in file("."))
       "uk.gov.hmrc" %% "play-auth" % "1.1.0",
       "uk.gov.hmrc" %% "play-config" % "4.3.0",
       "uk.gov.hmrc" %% "play-health" % "2.1.0",
+      "uk.gov.hmrc" %% "play-graphite" % "3.2.0",
       "uk.gov.hmrc" %% "play-ui" % "7.2.0",
 
       "org.scalatest" %% "scalatest" % "2.2.6" % Test,
