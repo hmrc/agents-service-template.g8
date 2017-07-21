@@ -5,12 +5,19 @@ lazy val root = (project in file("."))
     name := "$name$",
     organization := "uk.gov.hmrc",
     scalaVersion := "2.11.11",
+    resolvers := Seq(
+      Resolver.bintrayRepo("hmrc", "releases"),
+      Resolver.bintrayRepo("hmrc", "release-candidates"),
+      Resolver.typesafeRepo("releases"),
+      Resolver.jcenterRepo
+    ),
     libraryDependencies ++= Seq(
-      "uk.gov.hmrc" %% "play-config" % "4.3.0",
-      "uk.gov.hmrc" %% "play-auditing" % "2.10.0",
-      "uk.gov.hmrc" %% "play-health" % "2.1.0",
-      "uk.gov.hmrc" %% "play-auth" % "1.1.0",
       "uk.gov.hmrc" %% "http-verbs" % "6.4.0",
+      "uk.gov.hmrc" %% "play-auditing" % "2.10.0",
+      "uk.gov.hmrc" %% "play-auth" % "1.1.0",
+      "uk.gov.hmrc" %% "play-config" % "4.3.0",
+      "uk.gov.hmrc" %% "play-graphite" % "3.2.0",
+      "uk.gov.hmrc" %% "play-health" % "2.1.0",
       "uk.gov.hmrc" %% "logback-json-logger" % "3.1.0",
       "de.threedimensions" %% "metrics-play" % "2.5.13",
 
