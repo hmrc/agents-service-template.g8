@@ -8,12 +8,12 @@ import play.api.http.DefaultHttpFilters
 import play.api.{Configuration, Environment}
 import uk.gov.hmrc.auth.core.PlayAuthConnector
 import uk.gov.hmrc.auth.filter.{AuthorisationFilter, FilterConfig}
-import uk.gov.hmrc.play.audit.filters.{AuditFilter, FrontendAuditFilter}
+import uk.gov.hmrc.play.audit.filters.FrontendAuditFilter
 import uk.gov.hmrc.play.audit.http.config.LoadAuditingConfig
 import uk.gov.hmrc.play.audit.http.connector.AuditConnector
 import uk.gov.hmrc.play.config.inject.{DefaultServicesConfig, RunMode}
 import uk.gov.hmrc.play.http.logging.filters.FrontendLoggingFilter
-import uk.gov.hmrc.play.http.ws._
+import wiring.WSVerbs
 
 import scala.concurrent.ExecutionContext
 
@@ -55,11 +55,8 @@ class MicroserviceAuthFilter @Inject()(implicit val mat: Materializer, ec: Execu
 }
 
 class AuthConn @Inject()(defaultServicesConfig: DefaultServicesConfig,
-                         val http: WsVerbs) extends PlayAuthConnector {
+                         val http: WSVerbs) extends PlayAuthConnector {
 
   override val serviceUrl: String = defaultServicesConfig.baseUrl("auth")
 }
 
-class WsVerbs extends WSHttp {
-  override val hooks = NoneRequired
-}
