@@ -15,7 +15,7 @@ class ErrorHandler @Inject()(implicit configuration: Configuration, val messages
   override def onClientError(request: RequestHeader, statusCode: Int, message: String): Future[Result] = {
     Future successful
       Status(statusCode)(views.html.error_template(Messages(s"global.error.$statusCode.title"),
-        Messages(s"global.error.$statusCode.heading"), Messages(s"global.error.$statusCode.heading")))
+        Messages(s"global.error.$statusCode.heading"), Messages(s"global.error.$statusCode.message")))
   }
 
   override def onServerError(request: RequestHeader, exception: Throwable): Future[Result] = {
