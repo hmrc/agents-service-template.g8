@@ -11,10 +11,7 @@ abstract class BaseControllerISpec extends UnitSpec with OneAppPerSuite {
 
   override implicit lazy val app: Application = appBuilder.build()
 
-  protected def appBuilder: GuiceApplicationBuilder = {
-    new GuiceApplicationBuilder()
-      .configure(mongoConfiguration)
-  }
+  protected def appBuilder: GuiceApplicationBuilder = new GuiceApplicationBuilder()
 
   protected implicit val materializer = app.materializer
 

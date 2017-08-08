@@ -5,5 +5,5 @@ import play.api.test.Helpers._
 import play.api.test.{FakeHeaders, FakeRequest}
 
 class HelloWorldControllerISpec extends BaseControllerISpec {
-  private lazy val controller: AgentEpayeRegistrationController = app.injector.instanceOf[HelloWorldController]
+  private lazy val controller: HelloWorldController = app.injector.instanceOf[HelloWorldController]
 }
