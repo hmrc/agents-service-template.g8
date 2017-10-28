@@ -9,5 +9,35 @@ global.error.500.title=Sorry, we are experiencing technical difficulties - 500
 global.error.500.heading=Sorry, we’re experiencing technical difficulties
 global.error.500.message=Please try again in a few minutes.
 
+# Validation errors
+error.postcode.invalid=You can only enter these characters: A-Z 0-9
+error.telephone.invalid=You can only enter these characters: 0-9 ( ) space
+error.string.invalid=You can only enter these characters: a-z A-Z 0-9 ,.() - ! @ space
+error.maxLength=You can only enter up to {0} characters
+error.email=Enter a valid email address
+
 # Service specific messages
 app.name = $name$
+
+# Start page
+start.title = $name$
+start.helpdesklink.text1=Contact the online services helpdesk
+start.helpdesklink.text2=if you need help.
+
+# MyForm page
+myform.title=My Form
+myform.label=Enter your 1st parameter
+myform.description=This could be random characters.
+myform.parameter1.label=First parameter:
+myform.telephoneNumber.label=Telephone number:
+myform.emailAddress.label=Email address:
+
+# Summary page
+summary.title=$name$
+summary.label=Check your answers
+summary.header.parameter1=Parameters
+summary.header.contactDetails=Contact details
+summary.telephoneNumber=Telephone number:
+summary.emailAddress=Email address:
+
+button.continue=Continue

@@ -2,7 +2,7 @@ import org.scalatest.BeforeAndAfterEach
 import org.scalatest.mockito.MockitoSugar
 import org.scalatestplus.play.PlaySpec
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
-import play.api.Configuration
+import play.api.{Configuration, Environment}
 import play.api.i18n.MessagesApi
 import play.api.mvc.Result
 import play.api.test.FakeRequest
@@ -13,12 +13,11 @@ import uk.gov.hmrc.play.http.BadGatewayException
 import scala.concurrent.Future
 
 class ErrorHandlerSpec extends PlaySpec with MockitoSugar with GuiceOneAppPerSuite with BeforeAndAfterEach {
-  val messagesApi: MessagesApi = app.injector.instanceOf[MessagesApi]
-  val mockConfig: Configuration = app.injector.instanceOf[Configuration]
+  val messagesApi = app.injector.instanceOf[MessagesApi]
+  val handler = new ErrorHandler()(app.injector.instanceOf[Configuration], app.injector.instanceOf[Environment], messagesApi)
 
   "ErrorHandler should show the error page" when {
     "a server error occurs" in {
-      val handler = new ErrorHandler()(mockConfig, messagesApi)
       val result = handler.onServerError(FakeRequest(), new BadGatewayException(""))
 
       status(result) mustBe INTERNAL_SERVER_ERROR
@@ -27,7 +26,6 @@ class ErrorHandlerSpec extends PlaySpec with MockitoSugar with GuiceOneAppPerSui
     }
 
     "a client error (400) occurs" in {
-      val handler = new ErrorHandler()(mockConfig, messagesApi)
       val result = handler.onClientError(FakeRequest(), BAD_REQUEST, "")
 
       status(result) mustBe BAD_REQUEST
@@ -36,7 +34,6 @@ class ErrorHandlerSpec extends PlaySpec with MockitoSugar with GuiceOneAppPerSui
     }
 
     "a client error (404) occurs" in {
-      val handler = new ErrorHandler()(mockConfig, messagesApi)
       val result = handler.onClientError(FakeRequest(), NOT_FOUND, "")
 
       status(result) mustBe NOT_FOUND

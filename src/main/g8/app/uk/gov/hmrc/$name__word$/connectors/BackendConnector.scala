@@ -1,4 +1,4 @@
-package connectors
+package uk.gov.hmrc.$name;format="word"$.connectors
 
 import javax.inject.{Inject, Singleton}
 
@@ -15,7 +15,7 @@ class BackendConnector @Inject()(servicesConfig: DefaultServicesConfig, http: WS
   lazy val serviceURL = "hello-world"
 
   def retrieveHelloWorld()(implicit hc: HeaderCarrier): Future[HttpResponse] = {
-    http.GET[HttpResponse](s"$baseURL/$serviceURL")
+    http.GET[HttpResponse](s"\$baseURL/\$serviceURL")
   }
 
 }
