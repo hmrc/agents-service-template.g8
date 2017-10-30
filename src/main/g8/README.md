@@ -14,7 +14,7 @@
 
 It should then be listening on port $serviceport$
 
-    browse http://localhost:$serviceport$/$servicenamehyphen$
+    browse http://localhost:$serviceport$/$servicename;format="normalize"$
 
 ### License
 

@@ -8,7 +8,7 @@ import play.api.i18n.{ I18nSupport, MessagesApi }
 import play.api.mvc._
 import play.api.{ Configuration, Environment }
 import $package$.connectors.{ $backendservicenamecamel$Connector, FrontendAuthConnector }
-import $package$.models.$modelnamecamel$
+import $package$.models.$modelname$
 import $package$.views.html
 import uk.gov.hmrc.play.frontend.controller.FrontendController
 
@@ -63,12 +63,12 @@ object $servicenamecamel$Controller {
 
   import $package$.controllers.FieldMappings._
 
-  val $formname$ = Form[$modelnamecamel$](
+  val $formname$ = Form[$modelname$](
     mapping(
       "parameter1" -> validName,
       "parameter2" -> optional(postcode),
       "telephoneNumber" -> telephoneNumber,
       "emailAddress" -> emailAddress
-    )($modelnamecamel$.apply)($modelnamecamel$.unapply)
+    )($modelname$.apply)($modelname$.unapply)
   )
 }

@@ -4,9 +4,9 @@
 @import uk.gov.hmrc.play.views.html.helpers.input
 
 @import $package$.controllers.routes.$servicenamecamel$Controller
-@import $package$.models.$modelnamecamel$
+@import $package$.models.$modelname$
 
-@($formnamesmall$ : Form[$modelnamecamel$])(implicit request: Request[_], messages: Messages, config: Configuration)
+@($formnamesmall$ : Form[$modelname$])(implicit request: Request[_], messages: Messages, config: Configuration)
 
 @$package$.views.html.main_template(title = Messages("$formpath$.title"), bodyClasses = None) {
 

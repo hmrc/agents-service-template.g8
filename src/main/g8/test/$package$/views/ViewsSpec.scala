@@ -6,7 +6,7 @@ import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import play.twirl.api.Html
 import $package$.controllers.$servicenamecamel$Controller
-import $package$.models.$modelnamecamel$
+import $package$.models.$modelname$
 import $package$.views.html.error_template_Scope0.error_template_Scope1.error_template
 import $package$.views.html.govuk_wrapper_Scope0.govuk_wrapper_Scope1.govuk_wrapper
 import $package$.views.html.main_template_Scope0.main_template_Scope1.main_template
@@ -16,7 +16,7 @@ import uk.gov.hmrc.play.test.UnitSpec
 
 class ViewsSpec extends UnitSpec with OneAppPerSuite {
 
-  private val filledForm = $servicenamecamel$Controller.$formname$.fill($modelnamecamel$(
+  private val filledForm = $servicenamecamel$Controller.$formname$.fill($modelname$(
     parameter1 = "My contact name",
     parameter2 = Some("AA1 1AA"),
     telephoneNumber = Some("9876543210"),

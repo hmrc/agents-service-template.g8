@@ -1,9 +1,9 @@
 @import play.api.Configuration
 
 @import $package$.controllers.routes.$servicenamecamel$Controller
-@import $package$.models.$modelnamecamel$
+@import $package$.models.$modelname$
 
-@($formnamesmall$ : Form[$modelnamecamel$])(implicit request: Request[_], messages: Messages, config: Configuration)
+@($formnamesmall$ : Form[$modelname$])(implicit request: Request[_], messages: Messages, config: Configuration)
 
 @$package$.views.html.main_template(title = Messages("summary.title"), bodyClasses = None) {
 

@@ -6,7 +6,7 @@ import javax.inject.{ Inject, Named, Singleton }
 import com.codahale.metrics.MetricRegistry
 import com.kenshoo.play.metrics.Metrics
 import uk.gov.hmrc.agent.kenshoo.monitoring.HttpAPIMonitor
-import $package$.models.$modelnamecamel$
+import $package$.models.$modelname$
 
 import scala.concurrent.{ ExecutionContext, Future }
 import uk.gov.hmrc.http.{ HeaderCarrier, HttpGet, HttpPost, HttpResponse }
@@ -22,9 +22,9 @@ class $backendservicenamecamel$Connector @Inject() (@Named("$backendservicenameh
     }
   }
 
-  def postSmth(model: $modelnamecamel$)(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[HttpResponse] = {
+  def postSmth(model: $modelname$)(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[HttpResponse] = {
     monitor(s"ConsumedAPI-$backendservicenamehyphen$-smth-POST") {
-      http.POST[$modelnamecamel$, HttpResponse](new URL(baseUrl, "/$backendservicenamehyphen$/dosmth").toExternalForm, model)
+      http.POST[$modelname$, HttpResponse](new URL(baseUrl, "/$backendservicenamehyphen$/dosmth").toExternalForm, model)
     }
   }
 

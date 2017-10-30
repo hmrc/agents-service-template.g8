@@ -1,16 +1,16 @@
 package $package$.controllers
 
-import $package$.models.{ $modelnamecamel$ }
+import $package$.models.{ $modelname$ }
 import uk.gov.hmrc.play.test.UnitSpec
 
 class $formname$Spec extends UnitSpec {
 
   "$formname$" should {
 
-    "bind some input fields and return $modelnamecamel$ and fill it back" in {
+    "bind some input fields and return $modelname$ and fill it back" in {
       val form = $servicenamecamel$Controller.$formname$
 
-      val value = $modelnamecamel$(
+      val value = $modelname$(
         parameter1 = "SomeValue",
         parameter2 = None,
         telephoneNumber = None,
@@ -25,10 +25,10 @@ class $formname$Spec extends UnitSpec {
       form.fill(value).data shouldBe fieldValues
     }
 
-    "bind all input fields and return $modelnamecamel$ and fill it back" in {
+    "bind all input fields and return $modelname$ and fill it back" in {
       val form = $servicenamecamel$Controller.$formname$
 
-      val value = $modelnamecamel$(
+      val value = $modelname$(
         parameter1 = "SomeValue",
         parameter2 = Some("AA1 1AA"),
         telephoneNumber = Some("098765321"),

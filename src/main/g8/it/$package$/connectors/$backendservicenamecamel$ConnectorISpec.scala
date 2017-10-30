@@ -7,7 +7,7 @@ import com.kenshoo.play.metrics.Metrics
 import play.api.http.Status
 import play.api.libs.json.Json
 import $package$.controllers.BaseISpec
-import $package$.models.$modelnamecamel$
+import $package$.models.$modelname$
 import $package$.support.MetricsTestSupport
 import uk.gov.hmrc.http._
 
@@ -22,7 +22,7 @@ class $backendservicenamecamel$ConnectorISpec extends BaseISpec with MetricsTest
     app.injector.instanceOf[Metrics]
   )
 
-  private val model = $modelnamecamel$(
+  private val model = $modelname$(
     "Dave Agent",
     Some("AA1 1AA"),
     Some("0123456789"),

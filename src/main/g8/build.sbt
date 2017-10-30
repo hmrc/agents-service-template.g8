@@ -35,7 +35,7 @@ def testDeps(scope: String) = Seq(
 
 lazy val root = (project in file("."))
   .settings(
-    name := "$servicenamehyphen$-frontend",
+    name := "$servicenamehyphen$",
     organization := "uk.gov.hmrc",
     scalaVersion := "2.11.11",
     PlayKeys.playDefaultPort := $serviceport$,

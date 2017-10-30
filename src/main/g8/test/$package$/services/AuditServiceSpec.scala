@@ -8,7 +8,7 @@ import org.scalatest.mockito.MockitoSugar
 import org.scalatest.time.{ Millis, Span }
 import play.api.test.FakeRequest
 import uk.gov.hmrc.agentmtdidentifiers.model.Arn
-import $package$.models.$modelnamecamel$
+import $package$.models.$modelname$
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.http.logging.{ Authorization, RequestId, SessionId }
 import uk.gov.hmrc.play.audit.http.connector.AuditConnector
@@ -36,7 +36,7 @@ class AuditServiceSpec extends UnitSpec with MockitoSugar with Eventually {
         requestId = Some(RequestId("dummy request id"))
       )
 
-      val model = $modelnamecamel$(
+      val model = $modelname$(
         parameter1 = "John Smith",
         parameter2 = None,
         telephoneNumber = Some("12313"),
@@ -51,7 +51,7 @@ class AuditServiceSpec extends UnitSpec with MockitoSugar with Eventually {
         val sentEvent = captor.getValue.asInstanceOf[DataEvent]
 
         sentEvent.auditType shouldBe "$servicenamecamel$SomethingHappened"
-        sentEvent.auditSource shouldBe "$servicenamehyphen$-frontend"
+        sentEvent.auditSource shouldBe "$servicenamehyphen$"
         sentEvent.detail("agentReference") shouldBe "ARN0001"
         sentEvent.detail("parameter1") shouldBe "John Smith"
         sentEvent.detail("telephoneNumber") shouldBe "12313"
@@ -60,7 +60,7 @@ class AuditServiceSpec extends UnitSpec with MockitoSugar with Eventually {
         sentEvent.tags.contains("Authorization") shouldBe false
         sentEvent.detail("Authorization") shouldBe "dummy bearer token"
 
-        sentEvent.tags("transactionName") shouldBe "$servicenamehyphen$-frontend-something-happened"
+        sentEvent.tags("transactionName") shouldBe "$servicenamehyphen$-something-happened"
         sentEvent.tags("path") shouldBe "/path"
         sentEvent.tags("X-Session-ID") shouldBe "dummy session id"
         sentEvent.tags("X-Request-ID") shouldBe "dummy request id"
