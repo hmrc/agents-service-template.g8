@@ -1,9 +1,22 @@
-# $name$
+# $servicename$
 
-[ ![Download](https://api.bintray.com/packages/hmrc/releases/$name$/images/download.svg) ](https://bintray.com/hmrc/releases/$name$/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/hmrc/releases/$servicenamehyphen$/images/download.svg) ](https://bintray.com/hmrc/releases/$servicenamehyphen$/_latestVersion)
 
-This is a placeholder README.md for a new repository
+## Running the tests
+
+    sbt test it:test
+
+## Running the app locally
+
+    sm --start AGENT_MTD -f
+    sm --stop $servicename;format="upper,snake"$_FRONTEND
+    sbt run
+
+It should then be listening on port $serviceport$
+
+    browse http://localhost:$serviceport$/$servicenamehyphen$
 
 ### License
+
 
 This code is open source software licensed under the [Apache 2.0 License]("http://www.apache.org/licenses/LICENSE-2.0.html")

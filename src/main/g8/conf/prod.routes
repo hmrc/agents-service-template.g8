@@ -1,4 +1,4 @@
-->         /$name$               app.Routes
+->         /$servicenamehyphen$               app.Routes
 
 ->         /                     health.Routes
 ->         /template             template.Routes

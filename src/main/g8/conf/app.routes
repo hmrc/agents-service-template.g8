@@ -1,7 +1,7 @@
 # microservice specific routes
 
-GET         /                       uk.gov.hmrc.$name;format="word"$.controllers.$name;format="Camel"$Controller.root
-GET         /start                  uk.gov.hmrc.$name;format="word"$.controllers.$name;format="Camel"$Controller.start
-GET         /myform                 uk.gov.hmrc.$name;format="word"$.controllers.$name;format="Camel"$Controller.showMyForm
-POST        /myform                 uk.gov.hmrc.$name;format="word"$.controllers.$name;format="Camel"$Controller.myForm
+GET         /                       $package$.controllers.$servicenamecamel$Controller.root
+GET         /start                  $package$.controllers.$servicenamecamel$Controller.start
+GET         /$formpath$             $package$.controllers.$servicenamecamel$Controller.show$formname$
+POST        /$formpath$             $package$.controllers.$servicenamecamel$Controller.$formnamesmall$
 

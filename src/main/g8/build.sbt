@@ -1,6 +1,7 @@
 import sbt.Tests.{Group, SubProcess}
 import uk.gov.hmrc.sbtdistributables.SbtDistributablesPlugin._
 import uk.gov.hmrc.SbtAutoBuildPlugin
+import scalariform.formatter.preferences._
 
 lazy val scoverageSettings = {
   import scoverage.ScoverageKeys
@@ -16,37 +17,28 @@ lazy val scoverageSettings = {
 
 lazy val compileDeps = Seq(
   ws,
-  "uk.gov.hmrc" %% "http-verbs" % "6.4.0",
-  "uk.gov.hmrc" %% "play-auditing" % "2.10.0",
-  "uk.gov.hmrc" %% "play-auth" % "2.2.1",
-  "uk.gov.hmrc" %% "play-config" % "4.3.0",
-  "uk.gov.hmrc" %% "play-graphite" % "3.2.0",
-  "uk.gov.hmrc" %% "play-health" % "2.1.0",
-  "uk.gov.hmrc" %% "logback-json-logger" % "3.1.0",
-  "de.threedimensions" %% "metrics-play" % "2.5.13",
-  "uk.gov.hmrc" %% "frontend-bootstrap" % "7.26.0",
-  "uk.gov.hmrc" %% "play-partials" % "5.4.0",
-  "uk.gov.hmrc" %% "play-authorised-frontend" % "6.4.0",
-  "uk.gov.hmrc" %% "govuk-template" % "5.3.0",
-  "uk.gov.hmrc" %% "agent-kenshoo-monitoring" % "2.3.0",
-  "uk.gov.hmrc" %% "play-ui" % "7.4.0",
-  "uk.gov.hmrc" %% "agent-mtd-identifiers" % "0.5.0"
+  "uk.gov.hmrc" %% "frontend-bootstrap" % "8.9.0",
+  "uk.gov.hmrc" %% "auth-client" % "2.3.0",
+  "uk.gov.hmrc" %% "play-partials" % "6.1.0",
+  "uk.gov.hmrc" %% "agent-kenshoo-monitoring" % "2.4.0",
+  "uk.gov.hmrc" %% "agent-mtd-identifiers" % "0.5.0",
+  "de.threedimensions" %% "metrics-play" % "2.5.13"
 )
 
 def testDeps(scope: String) = Seq(
-  "org.scalatest" %% "scalatest" % "3.0.0" % scope,
-  "org.mockito" % "mockito-core" % "2.8.9" % scope,
-  "org.scalatestplus.play" %% "scalatestplus-play" % "2.0.0" % scope,
   "uk.gov.hmrc" %% "hmrctest" % "2.3.0" % scope,
-  "com.github.tomakehurst" % "wiremock" % "2.3.1" % scope
+  "org.scalatest" %% "scalatest" % "3.0.4" % scope,
+  "org.mockito" % "mockito-core" % "2.11.0" % scope,
+  "org.scalatestplus.play" %% "scalatestplus-play" % "2.0.0" % scope,
+  "com.github.tomakehurst" % "wiremock" % "2.10.1" % scope
 )
 
 lazy val root = (project in file("."))
   .settings(
-    name := "$name$",
+    name := "$servicenamehyphen$-frontend",
     organization := "uk.gov.hmrc",
     scalaVersion := "2.11.11",
-    PlayKeys.playDefaultPort := $port$,
+    PlayKeys.playDefaultPort := $serviceport$,
     resolvers := Seq(
       Resolver.bintrayRepo("hmrc", "releases"),
       Resolver.bintrayRepo("hmrc", "release-candidates"),
@@ -66,6 +58,7 @@ lazy val root = (project in file("."))
     parallelExecution in IntegrationTest := false,
     testGrouping in IntegrationTest := oneForkedJvmPerTest((definedTests in IntegrationTest).value)
   )
+  .settings(scalariformItSettings)
   .enablePlugins(PlayScala, SbtAutoBuildPlugin, SbtGitVersioning, SbtDistributablesPlugin)
 
 def oneForkedJvmPerTest(tests: Seq[TestDefinition]) = {

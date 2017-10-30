@@ -17,26 +17,29 @@ error.maxLength=You can only enter up to {0} characters
 error.email=Enter a valid email address
 
 # Service specific messages
-app.name = $name$
+app.name=$servicename$
 
 # Start page
-start.title = $name$
+start.title=$servicename$
+start.label=$servicename$
+start.intro=Describe purpose of your service / journey
 start.helpdesklink.text1=Contact the online services helpdesk
 start.helpdesklink.text2=if you need help.
 
 # MyForm page
-myform.title=My Form
-myform.label=Enter your 1st parameter
-myform.description=This could be random characters.
-myform.parameter1.label=First parameter:
-myform.telephoneNumber.label=Telephone number:
-myform.emailAddress.label=Email address:
+$formpath$.title=$servicename$ $formname$
+$formpath$.label=Enter your 1st parameter
+$formpath$.description=This could be random characters.
+$formpath$.parameter1.label=First parameter:
+$formpath$.telephoneNumber.label=Telephone number:
+$formpath$.emailAddress.label=Email address:
 
 # Summary page
-summary.title=$name$
+summary.title=$servicename$ Summary
 summary.label=Check your answers
-summary.header.parameter1=Parameters
+summary.header.parameters=Parameters
 summary.header.contactDetails=Contact details
+summary.parameter1=Parameter1
 summary.telephoneNumber=Telephone number:
 summary.emailAddress=Email address:
 
