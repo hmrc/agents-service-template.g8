@@ -1,3 +1,6 @@
+
+# Agents Service Template
+
 A [Giter8](http://www.foundweekends.org/giter8/) template for creating Scala Play projects for HMRC digital services
 
 To create a template service:
