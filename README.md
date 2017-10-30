@@ -1,15 +1,15 @@
 
-# HMRC Service Template
+# HMRC Digital Microservice Template
 
-A [Giter8](http://www.foundweekends.org/giter8/) template for creating Scala Play projects for HMRC Digital services.
+A [Giter8](http://www.foundweekends.org/giter8/) template for creating HMRC Digital [Playframework](https://playframework.com/) microservices.
 
 !!! DO NOT MERGE BRANCHES TO MASTER !!!
 
-## How to generate a service project:
+## How to generate new microservice project:
 
 1. Locate to the directory where you want to create the template.
 2. Decide your service name :-) and do not add `Frontend` suffix.
-3. To create a generic microservice run the command (after tweaking param values):
+3. To create a project run the command (after tweaking param values):
 
   ```
   sbt new hmrc/agents-service-template.g8 -b [agents-frontend|agents-api] --servicename="Some Shiny Service" --serviceport=9999
