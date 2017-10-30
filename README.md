@@ -2,16 +2,27 @@ A [Giter8](http://www.foundweekends.org/giter8/) template for creating Scala Pla
 
 To create a template service:
 
-* Locate to the directory where you want to create the template
-* Decide your service name :-) [do not add `Frontend` suffix]
-* To create a generic microservice run the command
+1. Locate to the directory where you want to create the template
+1. Decide your service name :-) [do not add `Frontend` suffix]
+1. To create a generic microservice run the command
 
-  `sbt new hmrc/agents-service-template.g8 -b [agents-frontend|agents-api] --servicename="My Service Name"`
+  `sbt new hmrc/agents-service-template.g8 -b [agents-frontend|agents-api] --servicename="Some Shiny Service" --serviceport=9999`
   
-* The new project folder will be created
-* Change working directory to the new one
-* Init git repo and do initial commit or configure remote repo
-* Test generated service with command 
+1. The new project folder will be created
+1. Change working directory to the new one
+
+  `cd some-shiny-service-frontend`
+
+1. Init git repo and do initial commit or configure remote repo
+
+  ```
+  git init
+  
+  git add .
+  git commit -m start
+  ```
+
+1. Test generated service with command 
 
   `sbt test it:test`
 
