@@ -5,7 +5,7 @@ A [Giter8](http://www.foundweekends.org/giter8/) template for creating Scala Pla
 
 !!! DO NOT MERGE BRANCHES TO MASTER !!!
 
-To create a template service:
+## How to generate a service project:
 
 1. Locate to the directory where you want to create the template.
 2. Decide your service name :-) and do not add `Frontend` suffix.
