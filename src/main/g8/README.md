@@ -1,4 +1,4 @@
-# $servicename$
+# $servicename$ Frontend
 
 [ ![Download](https://api.bintray.com/packages/hmrc/releases/$servicenamehyphen$/images/download.svg) ](https://bintray.com/hmrc/releases/$servicenamehyphen$/_latestVersion)
 
