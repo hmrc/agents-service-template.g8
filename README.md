@@ -6,7 +6,9 @@ To create a template service:
 2. Decide your service name :-) and do not add `Frontend` suffix
 3. To create a generic microservice run the command (after tweaking param values):
 
-  `sbt new hmrc/agents-service-template.g8 -b [agents-frontend|agents-api] --servicename="Some Shiny Service" --serviceport=9999`
+  ```
+  sbt new hmrc/agents-service-template.g8 -b [agents-frontend|agents-api] --servicename="Some Shiny Service" --serviceport=9999
+  ```
   
 4. The new project folder will be created
 5. Change working directory to the new one:
@@ -24,11 +26,15 @@ To create a template service:
 
 7. Test generated service with command:
 
-  `sbt test it:test`
+  ```
+  sbt test it:test
+  ```
   
 8. Start your service locally:
 
-  `sbt run`
+  ```
+  sbt run
+  ```
 
 
 !!! DO NOT MERGE BRANCHES TO MASTER !!!
