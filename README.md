@@ -41,7 +41,7 @@ To create a template service:
   sbt run
   ```
   
-## Example project layout
+## Example frontend project layout
 
 ```
 .
