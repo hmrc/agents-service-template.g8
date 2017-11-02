@@ -19,7 +19,7 @@
 
     <p>@Messages("$formpath$.description")</p>
 
-    <div class="form-field">
+    <div class="form-group">
       @input(
         $formnamesmall$("parameter1"),
         '_label -> Messages("$formpath$.parameter1.label"),
@@ -28,7 +28,7 @@
       )
     </div>
 
-    <div class="form-field">
+    <div class="form-group">
         @input(
             $formnamesmall$("emailAddress"),
             '_label -> Messages("$formpath$.emailAddress.label"),
@@ -37,7 +37,7 @@
         )
     </div>
 
-    <div class="form-field">
+    <div class="form-group">
         @input(
             $formnamesmall$("telephoneNumber"),
             '_label -> Messages("$formpath$.telephoneNumber.label"),
@@ -48,7 +48,7 @@
 
     <input type="hidden" name="parameter2" id="parameter2" value="@$formnamesmall$("parameter2").value">
 
-    <div class="form-field">
+    <div class="form-group">
       <button class="button" type="submit" id="continue">@Messages("button.continue")</button>
     </div>
   }
