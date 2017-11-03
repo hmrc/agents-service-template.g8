@@ -5,6 +5,10 @@
 ## Running the tests
 
     sbt test it:test
+    
+## Running the tests with coverage
+
+    sbt clean coverageOn test it:test coverageReport
 
 ## Running the app locally
 
