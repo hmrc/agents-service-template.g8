@@ -3,6 +3,7 @@ package $package$.controllers
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import uk.gov.hmrc.auth.core._
+import $package$.support.BaseISpec
 
 import scala.concurrent.duration._
 

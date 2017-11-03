@@ -17,7 +17,6 @@ trait AuthStubs {
       s"""
          |{
          |  "authorise": [
-         |    { "affinityGroup": "\${if (isAgent) "Agent" else "Individual"}" },
          |    { "identifiers":[], "state":"Activated", "enrolment": "\${enrolment.serviceName}" },
          |    { "authProviders": ["GovernmentGateway"] }
          |  ],

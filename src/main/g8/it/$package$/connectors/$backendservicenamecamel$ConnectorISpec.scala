@@ -6,7 +6,7 @@ import com.github.tomakehurst.wiremock.client.WireMock._
 import com.kenshoo.play.metrics.Metrics
 import play.api.http.Status
 import play.api.libs.json.Json
-import $package$.controllers.BaseISpec
+import $package$.support.BaseISpec
 import $package$.models.$modelname$
 import $package$.support.MetricsTestSupport
 import uk.gov.hmrc.http._

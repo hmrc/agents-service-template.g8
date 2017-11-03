@@ -1,4 +1,4 @@
-package $package$.controllers
+package $package$.support
 
 import org.scalatestplus.play.OneAppPerSuite
 import play.api.Application
@@ -10,7 +10,6 @@ import play.api.test.Helpers._
 import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.play.test.UnitSpec
 import $package$.stubs.AuthStubs
-import $package$.support.WireMockSupport
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.HeaderCarrierConverter
 
