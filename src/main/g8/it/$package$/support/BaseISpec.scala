@@ -22,7 +22,10 @@ class BaseISpec extends UnitSpec with OneAppPerSuite with WireMockSupport with A
       .configure(
         "microservice.services.auth.port" -> wireMockPort,
         "microservice.services.$backendservicenamehyphen$.port" -> wireMockPort,
-        "metrics.enabled" -> true
+        "metrics.enabled" -> true,
+        "auditing.enabled" -> true,
+        "auditing.consumer.baseUri.host" -> wireMockHost,
+        "auditing.consumer.baseUri.port" -> wireMockPort
       )
   }
 
