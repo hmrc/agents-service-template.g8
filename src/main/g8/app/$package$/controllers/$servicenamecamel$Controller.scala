@@ -25,16 +25,16 @@ class $servicenamecamel$Controller @Inject() (
 
   import $servicenamecamel$Controller._
 
-  val root: Action[AnyContent] = Action { implicit request =>
+  def root: Action[AnyContent] = Action { implicit request =>
     Redirect(routes.$servicenamecamel$Controller.start().url)
   }
 
-  val start: Action[AnyContent] = Action {
+  def start: Action[AnyContent] = Action {
     implicit request =>
       Ok(html.start())
   }
 
-  val show$formname$: Action[AnyContent] = Action.async {
+  def show$formname$: Action[AnyContent] = Action.async {
     implicit request =>
       withAuthorisedAsAgent { arn =>
         Future.successful(
@@ -43,7 +43,7 @@ class $servicenamecamel$Controller @Inject() (
       }
   }
 
-  val $formnamesmall$ = Action.async {
+  def $formnamesmall$ = Action.async {
     implicit request =>
       withAuthorisedAsAgent { arn =>
         $formname$.bindFromRequest().fold(
