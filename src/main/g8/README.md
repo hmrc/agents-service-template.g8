@@ -1,4 +1,4 @@
-# $servicename$ Frontend
+# $servicename$
 
 [ ![Download](https://api.bintray.com/packages/hmrc/releases/$servicenamehyphen$/images/download.svg) ](https://bintray.com/hmrc/releases/$servicenamehyphen$/_latestVersion)
 
@@ -13,7 +13,7 @@
 ## Running the app locally
 
     sm --start AGENT_MTD -f
-    sm --stop $servicename;format="upper,snake"$_FRONTEND
+    sm --stop $servicename;format="upper,snake"$
     sbt run
 
 It should then be listening on port $serviceport$

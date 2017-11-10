@@ -7,7 +7,7 @@ import uk.gov.hmrc.play.audit.http.config.{ AuditingConfig, BaseUri, Consumer }
 import uk.gov.hmrc.play.audit.http.connector.AuditConnector
 
 @Singleton
-class FrontendAuditConnector @Inject() (configuration: Configuration) extends AuditConnector {
+class MicroserviceAuditConnector @Inject() (configuration: Configuration) extends AuditConnector {
 
   override lazy val auditingConfig = loadAuditingConfig(configuration.getConfig("auditing"))
 
@@ -22,12 +22,9 @@ class FrontendAuditConnector @Inject() (configuration: Configuration) extends Au
               BaseUri(
                 host = uri.getString("host").getOrElse(throw new Exception("Missing consumer host for auditing")),
                 port = uri.getInt("port").getOrElse(throw new Exception("Missing consumer port for auditing")),
-                protocol = uri.getString("protocol").getOrElse("http")
-              )
-            }.getOrElse(throw new Exception("Missing consumer baseUri for auditing"))
-          )
-        }.getOrElse(throw new Exception("Missing consumer configuration for auditing")))
-      )
+                protocol = uri.getString("protocol").getOrElse("http"))
+            }.getOrElse(throw new Exception("Missing consumer baseUri for auditing")))
+        }.getOrElse(throw new Exception("Missing consumer configuration for auditing"))))
     } else {
       AuditingConfig(consumer = None, enabled = false)
     }

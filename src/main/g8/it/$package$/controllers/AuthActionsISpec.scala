@@ -1,15 +1,15 @@
 package $package$.controllers
 
-import play.api.mvc.{ Request, Result }
+import play.api.mvc.Result
+import play.api.mvc.Results._
 import play.api.test.FakeRequest
-import $package$.support.BaseISpec
 import uk.gov.hmrc.auth.core.{ AuthConnector, AuthorisationException, InsufficientEnrolments }
 import uk.gov.hmrc.http.{ HeaderCarrier, SessionKeys }
-import play.api.mvc.Results._
+import $package$.support.AppBaseISpec
 
 import scala.concurrent.Future
 
-class AuthActionsISpec extends BaseISpec {
+class AuthActionsISpec extends AppBaseISpec {
 
   object TestController extends AuthActions {
 

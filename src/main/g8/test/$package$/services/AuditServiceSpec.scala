@@ -21,8 +21,7 @@ class AuditServiceSpec extends UnitSpec with MockitoSugar with Eventually {
 
   override implicit val patienceConfig = PatienceConfig(
     timeout = scaled(Span(500, Millis)),
-    interval = scaled(Span(200, Millis))
-  )
+    interval = scaled(Span(200, Millis)))
 
   "auditService" should {
 
@@ -33,15 +32,13 @@ class AuditServiceSpec extends UnitSpec with MockitoSugar with Eventually {
       val hc = HeaderCarrier(
         authorization = Some(Authorization("dummy bearer token")),
         sessionId = Some(SessionId("dummy session id")),
-        requestId = Some(RequestId("dummy request id"))
-      )
+        requestId = Some(RequestId("dummy request id")))
 
       val model = $modelname$(
         parameter1 = "John Smith",
         parameter2 = None,
         telephoneNumber = Some("12313"),
-        emailAddress = Some("john.smith@email.com")
-      )
+        emailAddress = Some("john.smith@email.com"))
 
       await(service.send$servicenamecamel$SomethingHappened(model, Arn("ARN0001"))(hc, FakeRequest("GET", "/path")))
 

@@ -1,40 +1,43 @@
 import javax.inject.{ Inject, Singleton }
 
-import play.api.{ Configuration, Environment, Mode }
-import play.api.http.HeaderNames.CACHE_CONTROL
-import play.api.http.HttpErrorHandler
-import play.api.i18n.{ I18nSupport, Messages, MessagesApi }
+import play.api.http.Status._
+import play.api.http.{ DefaultHttpErrorHandler, HttpErrorConfig }
+import play.api.libs.json.Json
 import play.api.mvc.Results._
 import play.api.mvc.{ RequestHeader, Result }
-import $package$.views.html.error_template
-import uk.gov.hmrc.auth.core.{ InsufficientEnrolments, NoActiveSession }
-import uk.gov.hmrc.play.frontend.config.AuthRedirects
+import play.api.{ Configuration, Environment, Logger }
+import uk.gov.hmrc.http.{ HttpException, Upstream4xxResponse, Upstream5xxResponse }
+import uk.gov.hmrc.play.microservice.bootstrap.ErrorResponse
 
 import scala.concurrent.Future
 
 @Singleton
-class ErrorHandler @Inject() (implicit val config: Configuration, val env: Environment, val messagesApi: MessagesApi)
-  extends HttpErrorHandler with I18nSupport with AuthRedirects {
+class ErrorHandler @Inject() (val config: Configuration, val env: Environment)
+  extends DefaultHttpErrorHandler(HttpErrorConfig(showDevErrors = true, playEditor = None), None, None) {
 
-  override def onClientError(request: RequestHeader, statusCode: Int, message: String): Future[Result] = {
-    Future successful
-      Status(statusCode)(error_template(
-        Messages(s"global.error.\$statusCode.title"),
-        Messages(s"global.error.\$statusCode.heading"),
-        Messages(s"global.error.\$statusCode.message")
-      ))
-  }
+  implicit val erFormats = Json.format[ErrorResponse]
 
   override def onServerError(request: RequestHeader, exception: Throwable): Future[Result] = {
-    val response = exception match {
-      case _: NoActiveSession        => toGGLogin(if (env.mode.equals(Mode.Dev)) s"http://\${request.host}\${request.uri}" else s"\${request.uri}")
-      case _: InsufficientEnrolments => Forbidden
-      case _ => InternalServerError(error_template(
-        Messages("global.error.500.title"),
-        Messages("global.error.500.heading"),
-        Messages("global.error.500.message")
-      )).withHeaders(CACHE_CONTROL -> "no-cache")
+    val message = s"! Internal server error, for (\${request.method}) [\${request.uri}] -> "
+    Logger.error(message, exception)
+    Future.successful(resolveError(exception))
+  }
+
+  private def resolveError(ex: Throwable): Result = {
+    val errorResponse = ex match {
+      case e: HttpException => ErrorResponse(e.responseCode, e.getMessage)
+      case e: Upstream4xxResponse => ErrorResponse(e.reportAs, e.getMessage)
+      case e: Upstream5xxResponse => ErrorResponse(e.reportAs, e.getMessage)
+      case e: Throwable => ErrorResponse(INTERNAL_SERVER_ERROR, e.getMessage)
     }
-    Future.successful(response)
+
+    new Status(errorResponse.statusCode)(Json.toJson(errorResponse))
+  }
+
+  override def onBadRequest(request: RequestHeader, error: String) = {
+    Future.successful {
+      val er = ErrorResponse(BAD_REQUEST, error)
+      BadRequest(Json.toJson(er))
+    }
   }
 }
