@@ -89,7 +89,7 @@ class AuditFilter @Inject() (implicit val auditConnector: AuditConnector, val ma
 
   override def controllerNeedsAuditing(controllerName: String): Boolean = configuration.getBoolean(s"controllers.\$controllerName.needsAuditing").getOrElse(true)
 
-  override val appName: String = configuration.getString("appName").get
+  override val appName: String = "$servicenamehyphen$"
 
   override val applicationPort: Option[Int] = None
 }
