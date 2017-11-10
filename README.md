@@ -1,6 +1,6 @@
 A [Giter8](http://www.foundweekends.org/giter8/) template for creating Scala Play projects for HMRC digital services
 
-To create a template service:
+## To create a template service:
 
 * Locate to the directory where you want to create the template
 * Decide your service name :-) [do not add `Frontend` suffix]
@@ -14,6 +14,12 @@ To create a template service:
 * Test generated service with command 
 
     `sbt test it:test`
+    
+## Development
+
+Test template while developing running script in the project root:
+
+    `./test-agents-frontend-template.sh`    
 
 ## License
 
