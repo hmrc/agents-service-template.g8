@@ -14,12 +14,11 @@ import scala.concurrent.Future
 
 @Singleton
 class $servicenamecamel$Controller @Inject() (
-                                            override val messagesApi: MessagesApi,
                                             val authConnector: MicroserviceAuthConnector,
                                             val env: Environment)(implicit val configuration: Configuration)
-  extends BaseController with I18nSupport with AuthActions {
+  extends BaseController with AuthActions {
 
-  val entity: Action[AnyContent] = Action.async { implicit request =>
+  def entity: Action[AnyContent] = Action.async { implicit request =>
     Future.successful(Ok(toJson($modelname$("hello world", None, None, None))))
   }
 }
