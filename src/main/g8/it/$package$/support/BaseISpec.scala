@@ -13,7 +13,7 @@ import $package$.stubs.{AuthStubs,DataStreamStubs}
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.HeaderCarrierConverter
 
-class BaseISpec extends UnitSpec with OneAppPerSuite with WireMockSupport with AuthStubs with DataStreamStubs  with MetricsTestSupport  {
+class BaseISpec extends UnitSpec with OneAppPerSuite with WireMockSupport with AuthStubs with DataStreamStubs with MetricsTestSupport  {
 
   override implicit lazy val app: Application = appBuilder.build()
 

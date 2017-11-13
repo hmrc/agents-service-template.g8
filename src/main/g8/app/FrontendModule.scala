@@ -18,6 +18,7 @@ class FrontendModule(val environment: Environment, val configuration: Configurat
   override val runModeConfiguration: Configuration = configuration
 
   def configure(): Unit = {
+
     val appName = configuration.getString("appName").getOrElse(throw new Exception("Missing 'appName' config property"))
 
     val loggerDateFormat: Option[String] = configuration.getString("logger.json.dateformat")
@@ -31,6 +32,11 @@ class FrontendModule(val environment: Environment, val configuration: Configurat
     bind(classOf[HttpPost]).to(classOf[HttpVerbs])
     bind(classOf[AuthConnector]).to(classOf[FrontendAuthConnector])
     bind(classOf[AuditConnector]).to(classOf[FrontendAuditConnector])
+
+    //example of service property bindings
+    bindServiceConfigProperty[Int]("$backendservicenamehyphen$.someInt")
+    bindServiceConfigProperty[String]("$backendservicenamehyphen$.someString")
+    bindServiceConfigProperty[Boolean]("$backendservicenamehyphen$.someBoolean")
 
     bindBaseUrl("auth")
     bindBaseUrl("$backendservicenamehyphen$")
@@ -51,6 +57,58 @@ class FrontendModule(val environment: Environment, val configuration: Configurat
       .getOrElse(throw new IllegalStateException(s"No value found for configuration property \$confKey"))
   }
 
+  import scala.reflect.ClassTag
+  import com.google.inject.binder.ScopedBindingBuilder
+  import com.google.inject.name.Names.named
+
+  private def bindServiceConfigProperty[A](propertyName: String)(implicit classTag: ClassTag[A], ct: ServiceConfigPropertyType[A]): ScopedBindingBuilder =
+    ct.bindServiceConfigProperty(classTag.runtimeClass.asInstanceOf[Class[A]])(propertyName)
+
+  sealed trait ServiceConfigPropertyType[A] {
+    def bindServiceConfigProperty(clazz: Class[A])(propertyName: String): ScopedBindingBuilder
+  }
+
+  object ServiceConfigPropertyType {
+
+    implicit val stringServiceConfigProperty: ServiceConfigPropertyType[String] = new ServiceConfigPropertyType[String] {
+      def bindServiceConfigProperty(clazz: Class[String])(propertyName: String): ScopedBindingBuilder =
+        bind(clazz).annotatedWith(named(s"\$propertyName")).toProvider(new StringServiceConfigPropertyProvider(propertyName))
+
+      private class StringServiceConfigPropertyProvider(propertyName: String) extends Provider[String] {
+        override lazy val get = getConfString(propertyName, throw new RuntimeException(s"No service configuration value found for '\$propertyName'"))
+
+        def getConfString(confKey: String, defString: => String) = {
+          runModeConfiguration.getString(s"\$env.\$confKey").getOrElse(defString)
+        }
+      }
+    }
+
+    implicit val intServiceConfigProperty: ServiceConfigPropertyType[Int] = new ServiceConfigPropertyType[Int] {
+      def bindServiceConfigProperty(clazz: Class[Int])(propertyName: String): ScopedBindingBuilder =
+        bind(clazz).annotatedWith(named(s"\$propertyName")).toProvider(new IntServiceConfigPropertyProvider(propertyName))
+
+      private class IntServiceConfigPropertyProvider(propertyName: String) extends Provider[Int] {
+        override lazy val get = getConfInt(propertyName, throw new RuntimeException(s"No service configuration value found for '\$propertyName'"))
+
+        def getConfInt(confKey: String, defInt: => Int) = {
+          runModeConfiguration.getInt(s"\$env.\$confKey").getOrElse(defInt)
+        }
+      }
+    }
+
+    implicit val booleanServiceConfigProperty: ServiceConfigPropertyType[Boolean] = new ServiceConfigPropertyType[Boolean] {
+      def bindServiceConfigProperty(clazz: Class[Boolean])(propertyName: String): ScopedBindingBuilder =
+        bind(clazz).annotatedWith(named(s"\$propertyName")).toProvider(new BooleanServiceConfigPropertyProvider(propertyName))
+
+      private class BooleanServiceConfigPropertyProvider(propertyName: String) extends Provider[Boolean] {
+        override lazy val get = getConfBool(propertyName)
+
+        def getConfBool(confKey: String) = {
+          runModeConfiguration.getBoolean(s"\$confKey").getOrElse(false)
+        }
+      }
+    }
+  }
 }
 
 @Singleton
