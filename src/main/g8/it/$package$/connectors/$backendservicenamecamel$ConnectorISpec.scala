@@ -47,10 +47,11 @@ class $backendservicenamecamel$ConnectorISpec extends BaseISpec {
       }
 
       "throw an exception if no connection was possible" in {
-        stopServer()
+        stopWireMockServer()
         intercept[BadGatewayException] {
           await(connector.getSmth())
         }
+        startWireMockServer()
       }
 
       "throw an exception if the response is 400" in {
@@ -81,10 +82,11 @@ class $backendservicenamecamel$ConnectorISpec extends BaseISpec {
       }
 
       "throw an exception if no connection was possible" in {
-        stopServer()
+        stopWireMockServer()
         intercept[BadGatewayException] {
           await(connector.postSmth(model))
         }
+        startWireMockServer()
       }
 
       "throw an exception if the response is 400" in {
