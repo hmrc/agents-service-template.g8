@@ -9,11 +9,11 @@ import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import play.twirl.api.HtmlFormat
 import uk.gov.hmrc.play.test.UnitSpec
-import $package$.stubs.AuthStubs
+import $package$.stubs.{AuthStubs,DataStreamStubs}
 import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.HeaderCarrierConverter
 
-class BaseISpec extends UnitSpec with OneAppPerSuite with WireMockSupport with AuthStubs {
+class BaseISpec extends UnitSpec with OneAppPerSuite with WireMockSupport with AuthStubs with DataStreamStubs  with MetricsTestSupport  {
 
   override implicit lazy val app: Application = appBuilder.build()
 
@@ -27,6 +27,11 @@ class BaseISpec extends UnitSpec with OneAppPerSuite with WireMockSupport with A
         "auditing.consumer.baseUri.host" -> wireMockHost,
         "auditing.consumer.baseUri.port" -> wireMockPort
       )
+  }
+
+  override def commonStubs(): Unit = {
+    givenCleanMetricRegistry()
+    givenAuditConnector()
   }
 
   protected implicit val materializer = app.materializer

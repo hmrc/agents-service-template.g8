@@ -13,7 +13,7 @@ import uk.gov.hmrc.http._
 
 import scala.concurrent.ExecutionContext.Implicits.global
 
-class $backendservicenamecamel$ConnectorISpec extends BaseISpec with MetricsTestSupport {
+class $backendservicenamecamel$ConnectorISpec extends BaseISpec {
   private implicit val hc = HeaderCarrier()
 
   private lazy val connector: $backendservicenamecamel$Connector = new $backendservicenamecamel$Connector(
@@ -34,7 +34,6 @@ class $backendservicenamecamel$ConnectorISpec extends BaseISpec with MetricsTest
     "getSmth" should {
 
       "return 200" in {
-        givenCleanMetricRegistry()
         stubFor(get(urlEqualTo(s"/$backendservicenamehyphen$/dosmth"))
           .willReturn(
             aResponse()
@@ -70,7 +69,6 @@ class $backendservicenamecamel$ConnectorISpec extends BaseISpec with MetricsTest
     "postSmth" should {
 
       "return 201" in {
-        givenCleanMetricRegistry()
         stubFor(post(urlEqualTo(s"/$backendservicenamehyphen$/dosmth"))
           .willReturn(
             aResponse()

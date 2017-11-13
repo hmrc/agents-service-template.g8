@@ -21,6 +21,8 @@ object WireMockSupport {
 trait WireMockSupport extends BeforeAndAfterAll with BeforeAndAfterEach {
   me: Suite =>
 
+  def commonStubs(): Unit
+
   val wireMockPort: Int = WireMockSupport.wireMockPort
   val wireMockHost = "localhost"
   val wireMockBaseUrlAsString = s"http://\$wireMockHost:\$wireMockPort"
@@ -37,6 +39,7 @@ trait WireMockSupport extends BeforeAndAfterAll with BeforeAndAfterEach {
     WireMock.configureFor(wireMockHost, wireMockPort)
     wireMockServer.start()
     WireMock.reset()
+    commonStubs()
   }
 
   override protected def afterEach(): Unit = {
