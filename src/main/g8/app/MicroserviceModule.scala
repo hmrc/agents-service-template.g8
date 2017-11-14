@@ -74,10 +74,6 @@ class MicroserviceModule(val environment: Environment, val configuration: Config
 
       private class StringServiceConfigPropertyProvider(propertyName: String) extends Provider[String] {
         override lazy val get = getConfString(propertyName, throw new RuntimeException(s"No service configuration value found for '\$propertyName'"))
-
-        def getConfString(confKey: String, defString: => String) = {
-          runModeConfiguration.getString(s"\$env.\$confKey").getOrElse(defString)
-        }
       }
     }
 
@@ -87,10 +83,6 @@ class MicroserviceModule(val environment: Environment, val configuration: Config
 
       private class IntServiceConfigPropertyProvider(propertyName: String) extends Provider[Int] {
         override lazy val get = getConfInt(propertyName, throw new RuntimeException(s"No service configuration value found for '\$propertyName'"))
-
-        def getConfInt(confKey: String, defInt: => Int) = {
-          runModeConfiguration.getInt(s"\$env.\$confKey").getOrElse(defInt)
-        }
       }
     }
 
@@ -99,11 +91,7 @@ class MicroserviceModule(val environment: Environment, val configuration: Config
         bind(clazz).annotatedWith(named(s"\$propertyName")).toProvider(new BooleanServiceConfigPropertyProvider(propertyName))
 
       private class BooleanServiceConfigPropertyProvider(propertyName: String) extends Provider[Boolean] {
-        override lazy val get = getConfBool(propertyName)
-
-        def getConfBool(confKey: String) = {
-          runModeConfiguration.getBoolean(s"\$confKey").getOrElse(false)
-        }
+        override lazy val get = getConfBool(propertyName, false)
       }
     }
   }
