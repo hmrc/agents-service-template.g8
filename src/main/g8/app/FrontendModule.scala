@@ -19,7 +19,7 @@ class FrontendModule(val environment: Environment, val configuration: Configurat
 
   def configure(): Unit = {
 
-    val appName = configuration.getString("appName").getOrElse(throw new Exception("Missing 'appName' config property"))
+    val appName = "$servicenamehyphen$"
 
     val loggerDateFormat: Option[String] = configuration.getString("logger.json.dateformat")
     Logger.info(s"Starting microservice : \$appName : in mode : \${environment.mode}")
