@@ -18,7 +18,7 @@ class MicroserviceModule(val environment: Environment, val configuration: Config
   override val runModeConfiguration: Configuration = configuration
 
   def configure(): Unit = {
-    val appName = configuration.getString("appName").getOrElse(throw new Exception("Missing 'appName' config property"))
+    val appName = "$servicenamehyphen$"
 
     val loggerDateFormat: Option[String] = configuration.getString("logger.json.dateformat")
     Logger.info(s"Starting microservice : \$appName : in mode : \${environment.mode}")
