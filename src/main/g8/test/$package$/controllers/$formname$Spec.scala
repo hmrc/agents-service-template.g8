@@ -14,12 +14,10 @@ class $formname$Spec extends UnitSpec {
         parameter1 = "SomeValue",
         parameter2 = None,
         telephoneNumber = None,
-        emailAddress = None
-      )
+        emailAddress = None)
 
       val fieldValues = Map(
-        "parameter1" -> "SomeValue"
-      )
+        "parameter1" -> "SomeValue")
 
       form.bind(fieldValues).value shouldBe Some(value)
       form.fill(value).data shouldBe fieldValues
@@ -32,15 +30,13 @@ class $formname$Spec extends UnitSpec {
         parameter1 = "SomeValue",
         parameter2 = Some("AA1 1AA"),
         telephoneNumber = Some("098765321"),
-        emailAddress = Some("foo@bar.com")
-      )
+        emailAddress = Some("foo@bar.com"))
 
       val fieldValues = Map(
         "parameter1" -> "SomeValue",
         "parameter2" -> "AA1 1AA",
         "telephoneNumber" -> "098765321",
-        "emailAddress" -> "foo@bar.com"
-      )
+        "emailAddress" -> "foo@bar.com")
 
       form.bind(fieldValues).value shouldBe Some(value)
       form.fill(value).data shouldBe fieldValues

@@ -19,15 +19,13 @@ class $backendservicenamecamel$ConnectorISpec extends BaseISpec {
   private lazy val connector: $backendservicenamecamel$Connector = new $backendservicenamecamel$Connector(
     new URL(s"http://localhost:\$wireMockPort"),
     app.injector.instanceOf[HttpGet with HttpPost],
-    app.injector.instanceOf[Metrics]
-  )
+    app.injector.instanceOf[Metrics])
 
   private val model = $modelname$(
     "Dave Agent",
     Some("AA1 1AA"),
     Some("0123456789"),
-    Some("email@test.com")
-  )
+    Some("email@test.com"))
 
   "$backendservicenamecamel$Connector" when {
 
@@ -38,8 +36,7 @@ class $backendservicenamecamel$ConnectorISpec extends BaseISpec {
           .willReturn(
             aResponse()
               .withStatus(Status.OK)
-              .withBody(Json.obj("foo" -> "bar").toString())
-          ))
+              .withBody(Json.obj("foo" -> "bar").toString())))
 
         val response: HttpResponse = await(connector.getSmth())
         response.status shouldBe 200
@@ -58,8 +55,7 @@ class $backendservicenamecamel$ConnectorISpec extends BaseISpec {
         stubFor(get(urlEqualTo(s"/$backendservicenamehyphen$/dosmth"))
           .willReturn(
             aResponse()
-              .withStatus(Status.BAD_REQUEST)
-          ))
+              .withStatus(Status.BAD_REQUEST)))
 
         intercept[BadRequestException] {
           await(connector.getSmth())
@@ -73,8 +69,7 @@ class $backendservicenamecamel$ConnectorISpec extends BaseISpec {
         stubFor(post(urlEqualTo(s"/$backendservicenamehyphen$/dosmth"))
           .willReturn(
             aResponse()
-              .withStatus(Status.CREATED)
-          ))
+              .withStatus(Status.CREATED)))
 
         val response: HttpResponse = await(connector.postSmth(model))
         response.status shouldBe 201
@@ -93,8 +88,7 @@ class $backendservicenamecamel$ConnectorISpec extends BaseISpec {
         stubFor(post(urlEqualTo(s"/$backendservicenamehyphen$/dosmth"))
           .willReturn(
             aResponse()
-              .withStatus(Status.BAD_REQUEST)
-          ))
+              .withStatus(Status.BAD_REQUEST)))
 
         intercept[BadRequestException] {
           await(connector.postSmth(model))

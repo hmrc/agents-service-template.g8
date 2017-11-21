@@ -10,17 +10,16 @@ import play.api.{ Configuration, Environment }
 import $package$.connectors.{ $backendservicenamecamel$Connector, FrontendAuthConnector }
 import $package$.models.$modelname$
 import $package$.views.html
-import uk.gov.hmrc.play.frontend.controller.FrontendController
+import uk.gov.hmrc.play.bootstrap.controller.FrontendController
 
 import scala.concurrent.Future
 
 @Singleton
 class $servicenamecamel$Controller @Inject() (
   override val messagesApi: MessagesApi,
-  $backendservicenamesmall$Connector:         $backendservicenamecamel$Connector,
-  val authConnector:        FrontendAuthConnector,
-  val env:                  Environment
-)(implicit val configuration: Configuration)
+  $backendservicenamesmall$Connector: $backendservicenamecamel$Connector,
+  val authConnector: FrontendAuthConnector,
+  val env: Environment)(implicit val configuration: Configuration)
   extends FrontendController with I18nSupport with AuthActions {
 
   import $servicenamecamel$Controller._
@@ -38,8 +37,7 @@ class $servicenamecamel$Controller @Inject() (
     implicit request =>
       withAuthorisedAsAgent { arn =>
         Future.successful(
-          Ok(html.$formnamesmall$($formname$))
-        )
+          Ok(html.$formnamesmall$($formname$)))
       }
   }
 
@@ -52,8 +50,7 @@ class $servicenamecamel$Controller @Inject() (
           },
           data => {
             Future.successful(Ok(html.summary($formname$.fill(data))))
-          }
-        )
+          })
       }
   }
 
@@ -68,7 +65,5 @@ object $servicenamecamel$Controller {
       "parameter1" -> validName,
       "parameter2" -> optional(postcode),
       "telephoneNumber" -> telephoneNumber,
-      "emailAddress" -> emailAddress
-    )($modelname$.apply)($modelname$.unapply)
-  )
+      "emailAddress" -> emailAddress)($modelname$.apply)($modelname$.unapply))
 }

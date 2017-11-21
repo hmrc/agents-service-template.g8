@@ -21,8 +21,7 @@ trait DataStreamStubs extends Eventually {
               |  "auditType": "\$event",
               |  "tags": \${Json.toJson(tags)},
               |  "detail": \${Json.toJson(detail)}
-              |}"""
-        )))
+              |}""")))
     }
   }
 
@@ -33,14 +32,13 @@ trait DataStreamStubs extends Eventually {
           s"""{
               |  "auditSource": "$servicenamehyphen$",
               |  "auditType": "\$event"
-              |}"""
-        )))
+              |}""")))
     }
   }
 
   def givenAuditConnector(): Unit = {
     stubFor(post(urlPathEqualTo(auditUrl)).willReturn(aResponse().withStatus(200)))
-    stubFor(post(urlPathEqualTo(auditUrl+"/merged")).willReturn(aResponse().withStatus(200)))
+    stubFor(post(urlPathEqualTo(auditUrl + "/merged")).willReturn(aResponse().withStatus(200)))
   }
 
   private def auditUrl = "/write/audit"

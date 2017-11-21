@@ -3,17 +3,17 @@ import javax.inject.{ Inject, Singleton }
 import com.google.inject.name.Named
 import play.api.http.HeaderNames.CACHE_CONTROL
 import play.api.http.HttpErrorHandler
-import play.api.i18n.{ I18nSupport, Messages, MessagesApi }
+import play.api.i18n.{ Messages, MessagesApi }
 import play.api.mvc.Results._
-import play.api.mvc.{ RequestHeader, Result }
+import play.api.mvc.{ Request, RequestHeader, Result }
 import play.api.{ Configuration, Environment, Mode }
 import uk.gov.hmrc.auth.core.{ InsufficientEnrolments, NoActiveSession }
 import uk.gov.hmrc.http.{ JsValidationException, NotFoundException }
 import $package$.views.html.error_template
 import uk.gov.hmrc.play.HeaderCarrierConverter
 import uk.gov.hmrc.play.audit.http.connector.AuditConnector
-import uk.gov.hmrc.play.frontend.config.EventTypes.{ ResourceNotFound, ServerInternalError, ServerValidationError, TransactionFailureReason }
-import uk.gov.hmrc.play.frontend.config.{ AuthRedirects, HttpAuditEvent }
+import uk.gov.hmrc.play.bootstrap.http.FrontendErrorHandler
+import uk.gov.hmrc.play.bootstrap.config.{ AuthRedirects, HttpAuditEvent }
 
 import scala.concurrent.{ ExecutionContext, Future }
 
@@ -23,32 +23,42 @@ class ErrorHandler @Inject() (
                                val messagesApi: MessagesApi,
                                val auditConnector: AuditConnector,
                                @Named("appName") val appName: String)(implicit val config: Configuration, ec: ExecutionContext)
-  extends HttpErrorHandler with I18nSupport with AuthRedirects with ErrorAuditing {
+  extends FrontendErrorHandler with AuthRedirects with ErrorAuditing {
 
   override def onClientError(request: RequestHeader, statusCode: Int, message: String): Future[Result] = {
     auditClientError(request, statusCode, message)
-    Future successful
-      Status(statusCode)(error_template(
-        Messages(s"global.error.\$statusCode.title"),
-        Messages(s"global.error.\$statusCode.heading"),
-        Messages(s"global.error.\$statusCode.message")))
+    super.onClientError(request,statusCode,message)
   }
 
-  override def onServerError(request: RequestHeader, exception: Throwable): Future[Result] = {
-    auditServerError(request, exception)
-    val response = exception match {
+  override def resolveError(request: RequestHeader, exception: Throwable) = {
+    auditServerError(request,exception)
+    exception match {
       case _: NoActiveSession => toGGLogin(if (env.mode.equals(Mode.Dev)) s"http://\${request.host}\${request.uri}" else s"\${request.uri}")
       case _: InsufficientEnrolments => Forbidden
-      case _ => InternalServerError(error_template(
-        Messages("global.error.500.title"),
-        Messages("global.error.500.heading"),
-        Messages("global.error.500.message"))).withHeaders(CACHE_CONTROL -> "no-cache")
+      case _ => super.resolveError(request, exception)
     }
-    Future.successful(response)
+  }
+
+  override def standardErrorTemplate(pageTitle: String, heading: String, message: String)(implicit request: Request[_]) = {
+    error_template(
+      Messages("global.error.500.title"),
+      Messages("global.error.500.heading"),
+      Messages("global.error.500.message"))
   }
 }
 
+object EventTypes {
+
+  val RequestReceived: String = "RequestReceived"
+  val TransactionFailureReason: String = "transactionFailureReason"
+  val ServerInternalError: String = "ServerInternalError"
+  val ResourceNotFound: String = "ResourceNotFound"
+  val ServerValidationError: String = "ServerValidationError"
+}
+
 trait ErrorAuditing extends HttpAuditEvent {
+
+  import EventTypes._
 
   def auditConnector: AuditConnector
 

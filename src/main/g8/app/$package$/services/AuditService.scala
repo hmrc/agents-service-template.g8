@@ -32,8 +32,7 @@ class AuditService @Inject() (val auditConnector: AuditConnector) {
         "agentReference" -> agentReference.value,
         "parameter1" -> model.parameter1,
         "telephoneNumber" -> model.telephoneNumber.getOrElse(""),
-        "emailAddress" -> model.emailAddress.getOrElse("")
-      ))
+        "emailAddress" -> model.emailAddress.getOrElse("")))
   }
 
   private[services] def auditEvent(event: $servicenamecamel$Event, transactionName: String, details: Seq[(String, Any)] = Seq.empty)(implicit hc: HeaderCarrier, request: Request[Any]): Future[Unit] = {
@@ -48,8 +47,7 @@ class AuditService @Inject() (val auditConnector: AuditConnector) {
       auditSource = "$servicenamehyphen$",
       auditType = event.toString,
       tags = tags,
-      detail = detail
-    )
+      detail = detail)
   }
 
   private[services] def send(events: DataEvent*)(implicit hc: HeaderCarrier): Future[Unit] = {

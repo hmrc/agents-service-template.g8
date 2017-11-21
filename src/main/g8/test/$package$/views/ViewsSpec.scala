@@ -20,8 +20,7 @@ class ViewsSpec extends UnitSpec with OneAppPerSuite {
     parameter1 = "My contact name",
     parameter2 = Some("AA1 1AA"),
     telephoneNumber = Some("9876543210"),
-    emailAddress = Some("my@email.com")
-  ))
+    emailAddress = Some("my@email.com")))
 
   "error_template view" should {
     "render title, heading and message" in new App {
@@ -33,8 +32,7 @@ class ViewsSpec extends UnitSpec with OneAppPerSuite {
         heading = heading,
         message = message,
         messages = Messages.Implicits.applicationMessages,
-        configuration = app.configuration
-      )
+        configuration = app.configuration)
       val content = contentAsString(html)
       content should include(pageTitle)
       content should include(heading)
@@ -50,8 +48,7 @@ class ViewsSpec extends UnitSpec with OneAppPerSuite {
       val html = new start().render(
         request = FakeRequest(),
         messages = Messages.Implicits.applicationMessages,
-        config = app.configuration
-      )
+        config = app.configuration)
       val content = contentAsString(html)
 
       import Messages.Implicits.applicationMessages
@@ -72,8 +69,7 @@ class ViewsSpec extends UnitSpec with OneAppPerSuite {
         $formnamesmall$ = filledForm,
         request = FakeRequest(),
         messages = Messages.Implicits.applicationMessages,
-        config = app.configuration
-      )
+        config = app.configuration)
       val content = contentAsString(html)
 
       import Messages.Implicits.applicationMessages
@@ -102,8 +98,7 @@ class ViewsSpec extends UnitSpec with OneAppPerSuite {
         mainContent = Html("My custom main content HTML"),
         messages = Messages.Implicits.applicationMessages,
         request = FakeRequest(),
-        configuration = app.configuration
-      )
+        configuration = app.configuration)
 
       val content = contentAsString(html)
       content should include("My custom page title")
@@ -120,8 +115,7 @@ class ViewsSpec extends UnitSpec with OneAppPerSuite {
         Some(Html("My custom content header")),
         Some("my-custom-body-class"),
         Some("my-custom-main-class"),
-        Some(Html("My custom script"))
-      )(Html("My custom main content HTML"))(Messages.Implicits.applicationMessages, FakeRequest(), app.configuration)
+        Some(Html("My custom script")))(Html("My custom main content HTML"))(Messages.Implicits.applicationMessages, FakeRequest(), app.configuration)
       contentAsString(html2) shouldBe (content)
     }
   }
@@ -141,8 +135,7 @@ class ViewsSpec extends UnitSpec with OneAppPerSuite {
         scriptElem = Some(Html("My custom script")),
         gaCode = Seq("My custom GA code"),
         messages = Messages.Implicits.applicationMessages,
-        configuration = app.configuration
-      )
+        configuration = app.configuration)
 
       val content = contentAsString(html)
       content should include("My custom page title")
@@ -165,8 +158,7 @@ class ViewsSpec extends UnitSpec with OneAppPerSuite {
         Html("My custom main content"),
         Html("My custom service info content"),
         Some(Html("My custom script")),
-        Seq("My custom GA code")
-      )(Messages.Implicits.applicationMessages, app.configuration)
+        Seq("My custom GA code"))(Messages.Implicits.applicationMessages, app.configuration)
       contentAsString(html2) shouldBe (content)
     }
   }
