@@ -15,14 +15,14 @@ class $servicenamecamel$ControllerISpec extends ServerBaseISpec {
   val wsClient = app.injector.instanceOf[WSClient]
 
   def entity(): WSResponse = {
-    wsClient.url(s"\$url/entity")
+    wsClient.url(s"\$url/entities")
       .get()
       .futureValue
   }
 
   "$servicenamecamel$Controller" when {
 
-    "GET /entity" should {
+    "GET /entities" should {
       "respond with some data" in {
         val result = entity()
         result.status shouldBe 200

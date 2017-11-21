@@ -1,4 +1,4 @@
 # microservice specific routes
 
-GET         /entity                       @$package$.controllers.$servicenamecamel$Controller.entity
+GET         /entities                       @$package$.controllers.$servicenamecamel$Controller.entities
 
