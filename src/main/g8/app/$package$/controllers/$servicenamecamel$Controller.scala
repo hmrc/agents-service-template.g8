@@ -14,8 +14,8 @@ import scala.concurrent.Future
 
 @Singleton
 class $servicenamecamel$Controller @Inject() (
-                                            val authConnector: MicroserviceAuthConnector,
-                                            val env: Environment)(implicit val configuration: Configuration)
+  val authConnector: MicroserviceAuthConnector,
+  val env: Environment)(implicit val configuration: Configuration)
   extends BaseController with AuthActions {
 
   def entity: Action[AnyContent] = Action.async { implicit request =>

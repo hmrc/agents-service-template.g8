@@ -11,9 +11,9 @@ import uk.gov.hmrc.play.microservice.filters._
 import scala.concurrent.ExecutionContext
 
 class MicroserviceFilters @Inject() (
-                                      loggingFilter: LoggingFilter,
-                                      auditFilter: MicroserviceAuditFilter,
-                                      metricsFilter: MetricsFilter) extends HttpFilters {
+  loggingFilter: LoggingFilter,
+  auditFilter: MicroserviceAuditFilter,
+  metricsFilter: MetricsFilter) extends HttpFilters {
 
   override def filters: Seq[EssentialFilter] = Seq(
     Some(metricsFilter),

@@ -2,7 +2,7 @@ package $package$.support
 
 import org.scalatestplus.play.OneAppPerSuite
 import play.api.Application
-import play.api.i18n.{Lang, Messages, MessagesApi}
+import play.api.i18n.{ Lang, Messages, MessagesApi }
 import play.api.inject.guice.GuiceApplicationBuilder
 import play.api.mvc.Result
 import play.api.test.FakeRequest

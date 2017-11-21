@@ -18,8 +18,7 @@ import uk.gov.hmrc.play.microservice.config.HttpAuditEvent
 import scala.concurrent.{ ExecutionContext, Future }
 
 @Singleton
-class ErrorHandler @Inject() (val env: Environment, val auditConnector: AuditConnector, @Named("appName") val appName: String)
-                             (implicit val config: Configuration, ec: ExecutionContext)
+class ErrorHandler @Inject() (val env: Environment, val auditConnector: AuditConnector, @Named("appName") val appName: String)(implicit val config: Configuration, ec: ExecutionContext)
   extends DefaultHttpErrorHandler(HttpErrorConfig(showDevErrors = true, playEditor = None), None, None) with ErrorAuditing {
 
   implicit val erFormats = Json.format[ErrorResponse]
