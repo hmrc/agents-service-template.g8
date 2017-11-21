@@ -114,6 +114,67 @@ A [Giter8](http://www.foundweekends.org/giter8/) template for creating HMRC Digi
                         └── ViewsSpec.scala
 ```
 
+## Example microservice project layout
+
+```
+.
+├── README.md
+├── app
+│   ├── MicroserviceModule.scala
+│   └── uk
+│       └── gov
+│           └── hmrc
+│               └── newshinyservice
+│                   ├── connectors
+│                   │   └── MicroserviceAuthConnector.scala
+│                   ├── controllers
+│                   │   ├── AuthActions.scala
+│                   │   └── NewShinyServiceController.scala
+│                   ├── models
+│                   │   └── NewShinyServiceModel.scala
+│                   └── services
+│                       └── AuditService.scala
+├── build.sbt
+├── conf
+│   ├── app.routes
+│   ├── application-json-logger.xml
+│   ├── application.conf
+│   ├── logback.xml
+│   └── prod.routes
+├── it
+│   └── uk
+│       └── gov
+│           └── hmrc
+│               └── newshinyservice
+│                   ├── controllers
+│                   │   ├── AuthActionsISpec.scala
+│                   │   └── NewShinyServiceControllerISpec.scala
+│                   ├── stubs
+│                   │   ├── AuthStubs.scala
+│                   │   └── DataStreamStubs.scala
+│                   └── support
+│                       ├── AppBaseISpec.scala
+│                       ├── BaseISpec.scala
+│                       ├── MetricsTestSupport.scala
+│                       ├── ServerBaseISpec.scala
+│                       └── WireMockSupport.scala
+├── logs
+│   ├── access.log
+│   ├── connector.log
+│   └── new-shiny-service.log
+├── project
+│   ├── build.properties
+│   ├── plugins.sbt
+│   └── project
+└── test
+    └── uk
+        └── gov
+            └── hmrc
+                └── newshinyservice
+                    └── services
+                        └── AuditServiceSpec.scala
+```
+
 ## License
 
 This code is open source software licensed under the [Apache 2.0 License]("http://www.apache.org/licenses/LICENSE-2.0.html").
