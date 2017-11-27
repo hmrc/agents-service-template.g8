@@ -18,18 +18,18 @@ lazy val scoverageSettings = {
 lazy val compileDeps = Seq(
   ws,
   "uk.gov.hmrc" %% "bootstrap-play-25" % "1.0.0",
-  "uk.gov.hmrc" %% "auth-client" % "2.3.0",
+  "uk.gov.hmrc" %% "auth-client" % "2.4.0",
   "uk.gov.hmrc" %% "agent-mtd-identifiers" % "0.5.0",
   "de.threedimensions" %% "metrics-play" % "2.5.13",
   "uk.gov.hmrc" %% "domain" % "5.0.0"
 )
 
 def testDeps(scope: String) = Seq(
-  "uk.gov.hmrc" %% "hmrctest" % "2.3.0" % scope,
+  "uk.gov.hmrc" %% "hmrctest" % "3.0.0" % scope,
   "org.scalatest" %% "scalatest" % "3.0.4" % scope,
-  "org.mockito" % "mockito-core" % "2.11.0" % scope,
+  "org.mockito" % "mockito-core" % "2.12.0" % scope,
   "org.scalatestplus.play" %% "scalatestplus-play" % "2.0.0" % scope,
-  "com.github.tomakehurst" % "wiremock" % "2.10.1" % scope
+  "com.github.tomakehurst" % "wiremock" % "2.11.0" % scope
 )
 
 lazy val root = (project in file("."))
