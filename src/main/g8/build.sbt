@@ -18,21 +18,21 @@ lazy val scoverageSettings = {
 lazy val compileDeps = Seq(
   ws,
   "uk.gov.hmrc" %% "bootstrap-play-25" % "1.0.0",
-  "uk.gov.hmrc" %% "govuk-template" % "5.15.0",
-  "uk.gov.hmrc" %% "play-ui" % "7.8.0",
-  "uk.gov.hmrc" %% "auth-client" % "2.4.0",
+  "uk.gov.hmrc" %% "govuk-template" % "5.17.0",
+  "uk.gov.hmrc" %% "play-ui" % "7.13.0",
+  "uk.gov.hmrc" %% "auth-client" % "2.5.0",
   "uk.gov.hmrc" %% "play-partials" % "6.1.0",
   "uk.gov.hmrc" %% "agent-kenshoo-monitoring" % "2.4.0",
-  "uk.gov.hmrc" %% "agent-mtd-identifiers" % "0.5.0",
-  "uk.gov.hmrc" %% "domain" % "5.0.0"
+  "uk.gov.hmrc" %% "agent-mtd-identifiers" % "0.8.0",
+  "uk.gov.hmrc" %% "domain" % "5.1.0"
 )
 
 def testDeps(scope: String) = Seq(
   "uk.gov.hmrc" %% "hmrctest" % "3.0.0" % scope,
   "org.scalatest" %% "scalatest" % "3.0.4" % scope,
-  "org.mockito" % "mockito-core" % "2.12.0" % scope,
+  "org.mockito" % "mockito-core" % "2.13.0" % scope,
   "org.scalatestplus.play" %% "scalatestplus-play" % "2.0.1" % scope,
-  "com.github.tomakehurst" % "wiremock" % "2.11.0" % scope
+  "com.github.tomakehurst" % "wiremock" % "2.13.0" % scope
 )
 
 lazy val root = (project in file("."))
