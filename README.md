@@ -6,7 +6,11 @@ To create a template service:
 * Decide your service name :-) [do not add `Frontend` suffix]
 * To create a generic microservice run the command
 
-  `sbt new hmrc/agents-service-template.g8 -b agents-frontend|agents-api --servicename="My Service Name"`
+  `sbt new hmrc/agents-service-template.g8 -b agents-frontend|agents-api --servicename="My Service Name" --mongodb=false`
+  
+* To create a generic microservice with MongoDB run the command
+
+  `sbt new hmrc/agents-service-template.g8 -b agents-frontend|agents-api --servicename="My Service Name" --mongodb=true`
   
 * The new project folder will be created
 * Change working directory to the new one
