@@ -1,6 +1,7 @@
 A [Giter8](http://www.foundweekends.org/giter8/) template for creating Scala Play projects for HMRC digital services
 
 To create a template service:
+==
 
 * Install g8 commandline tool (http://www.foundweekends.org/giter8/setup.html)
 * Locate to the directory where you want to create the template
@@ -19,6 +20,14 @@ To create a template service:
 * Test generated service with command 
 
     `sbt test it:test`
+  
+To test template itself  
+==
+
+* Run `./test-agents-backend-template.sh` 
+* and `./test-agents-backend-template-with-mongodb.sh`
+
+Temporary services will be then created and tested in `target/sandbox/new-shiny-service/` and `target/sandbox/new-shiny-service-with-mongodb/`
 
 ## License
 
