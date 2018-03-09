@@ -5,14 +5,14 @@ To create a template service:
 
 * Install g8 commandline tool (http://www.foundweekends.org/giter8/setup.html)
 * Locate to the directory where you want to create the template
-* Decide your service name :-) [do not add `Frontend` suffix]
+* Decide your service name :-)
 * To create a generic microservice run the command
 
-  `g8 hmrc/agents-service-template.g8 -b agents-frontend|agents-api --servicename="My Service Name" --mongodb=false`
+  `g8 hmrc/agents-service-template.g8 -b agents-api --servicename="My Service Name" --mongodb=false`
   
 * To create a generic microservice with MongoDB run the command
 
-  `g8 hmrc/agents-service-template.g8 -b agents-frontend|agents-api --servicename="My Service Name" --mongodb=true`
+  `g8 hmrc/agents-service-template.g8 -b agents-api --servicename="My Service Name" --mongodb=true`
   
 * The new project folder will be created
 * Change working directory to the new one
