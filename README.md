@@ -55,9 +55,10 @@ A [Giter8](http://www.foundweekends.org/giter8/) template for creating HMRC Digi
   
 ## How to develop and test template itself?
 
-1. Checkout the right branch [agent-api|agent-frontend]
+1. Checkout the right branch [agent-api|agent-frontend] as a starting point
 2. Remember to use placeholders for names (see examples in existing code)
 3. Escape all string interpolation tokens in Scala: `\$` instead of `$` 
+3. Create new branch for diverging templates, use conditionals for small optional features 
 4. Test template before pushing changes using `./test-*` scripts
 5. Always use latest dependencies, upgrade if needed
 6. All support and PRs kindly welcome!
