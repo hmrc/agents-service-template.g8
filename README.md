@@ -63,36 +63,34 @@ A [Giter8](http://www.foundweekends.org/giter8/) template for creating HMRC Digi
 5. Always use latest dependencies, upgrade if needed
 6. All support and PRs kindly welcome!
   
-## Example frontend project layout
+## Example frontend microservice project layout
 
 ```
 .
 ├── README.md
 ├── app
 │   ├── ErrorHandler.scala
-│   ├── FrontendFilters.scala
 │   ├── FrontendModule.scala
 │   └── uk
 │       └── gov
 │           └── hmrc
-│               └── someshinyservicefrontend
+│               └── newshinyservicefrontend
 │                   ├── connectors
-│                   │   ├── FrontendAuditConnector.scala
 │                   │   ├── FrontendAuthConnector.scala
-│                   │   └── SomeShinyServiceConnector.scala
+│                   │   └── NewShinyServiceConnector.scala
 │                   ├── controllers
 │                   │   ├── AuthActions.scala
-│                   │   ├── SomeShinyServiceFrontendController.scala
+│                   │   ├── NewShinyServiceFrontendController.scala
 │                   │   └── package.scala
 │                   ├── models
-│                   │   └── SomeShinyServiceFrontendModel.scala
+│                   │   └── NewShinyServiceFrontendModel.scala
 │                   ├── services
 │                   │   └── AuditService.scala
 │                   └── views
 │                       ├── error_template.scala.html
 │                       ├── govuk_wrapper.scala.html
 │                       ├── main_template.scala.html
-│                       ├── someShinyServiceFrontendForm.scala.html
+│                       ├── newShinyServiceFrontendForm.scala.html
 │                       ├── start.scala.html
 │                       └── summary.scala.html
 ├── build.sbt
@@ -107,36 +105,37 @@ A [Giter8](http://www.foundweekends.org/giter8/) template for creating HMRC Digi
 │   └── uk
 │       └── gov
 │           └── hmrc
-│               └── someshinyservicefrontend
+│               └── newshinyservicefrontend
 │                   ├── connectors
-│                   │   └── SomeShinyServiceConnectorISpec.scala
+│                   │   └── NewShinyServiceConnectorISpec.scala
 │                   ├── controllers
-│                   │   ├── BaseISpec.scala
-│                   │   └── SomeShinyServiceFrontendControllerISpec.scala
+│                   │   ├── AuthActionsISpec.scala
+│                   │   └── NewShinyServiceFrontendControllerISpec.scala
 │                   ├── stubs
 │                   │   ├── AuthStubs.scala
 │                   │   └── DataStreamStubs.scala
 │                   └── support
+│                       ├── BaseISpec.scala
 │                       ├── MetricsTestSupport.scala
 │                       └── WireMockSupport.scala
 ├── project
 │   ├── build.properties
-│   └── plugins.sbt
+│   ├── plugins.sbt
+│   └── project
 └── test
-    ├── ErrorHandlerSpec.scala
     └── uk
         └── gov
             └── hmrc
-                └── someshinyservicefrontend
+                └── newshinyservicefrontend
                     ├── controllers
-                    │   └── SomeShinyServiceFrontendFormSpec.scala
+                    │   └── NewShinyServiceFrontendFormSpec.scala
                     ├── services
                     │   └── AuditServiceSpec.scala
                     └── views
                         └── ViewsSpec.scala
 ```
 
-## Example microservice project layout
+## Example backend microservice project layout
 
 ```
 .
@@ -147,6 +146,9 @@ A [Giter8](http://www.foundweekends.org/giter8/) template for creating HMRC Digi
 │       └── gov
 │           └── hmrc
 │               └── newshinyservice
+│                   ├── binders
+│                   │   ├── SimpleObjectBinder.scala
+│                   │   └── UrlBinders.scala
 │                   ├── connectors
 │                   │   └── MicroserviceAuthConnector.scala
 │                   ├── controllers
@@ -154,8 +156,14 @@ A [Giter8](http://www.foundweekends.org/giter8/) template for creating HMRC Digi
 │                   │   └── NewShinyServiceController.scala
 │                   ├── models
 │                   │   └── NewShinyServiceModel.scala
-│                   └── services
-│                       └── AuditService.scala
+│                   ├── repository
+│                   │   ├── NewShinyServiceRepository.scala
+│                   │   └── StrictlyEnsureIndexes.scala
+│                   ├── services
+│                   │   └── AuditService.scala
+│                   └── wiring
+│                       ├── MicroserviceFilters.scala
+│                       └── MicroserviceMonitoringFilter.scala
 ├── build.sbt
 ├── conf
 │   ├── app.routes
@@ -171,6 +179,8 @@ A [Giter8](http://www.foundweekends.org/giter8/) template for creating HMRC Digi
 │                   ├── controllers
 │                   │   ├── AuthActionsISpec.scala
 │                   │   └── NewShinyServiceControllerISpec.scala
+│                   ├── repository
+│                   │   └── NewShinyServiceRepositoryISpec.scala
 │                   ├── stubs
 │                   │   ├── AuthStubs.scala
 │                   │   └── DataStreamStubs.scala
@@ -178,12 +188,9 @@ A [Giter8](http://www.foundweekends.org/giter8/) template for creating HMRC Digi
 │                       ├── AppBaseISpec.scala
 │                       ├── BaseISpec.scala
 │                       ├── MetricsTestSupport.scala
+│                       ├── MongoApp.scala
 │                       ├── ServerBaseISpec.scala
 │                       └── WireMockSupport.scala
-├── logs
-│   ├── access.log
-│   ├── connector.log
-│   └── new-shiny-service.log
 ├── project
 │   ├── build.properties
 │   ├── plugins.sbt
