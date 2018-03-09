@@ -20,6 +20,11 @@ To create a template service:
 * Test generated service with command 
 
     `sbt test it:test`
+    
+Known issues
+==
+
+* `sbt new` command uses old version of giter8 library (0.7.2), support for conditionals has been added in version 0.10.0
   
 To test template itself  
 ==
