@@ -8,6 +8,7 @@ import play.api.{ Configuration, Environment }
 import $package$.connectors.MicroserviceAuthConnector
 import $package$.models.$modelname$
 import uk.gov.hmrc.play.bootstrap.controller.BaseController
+import uk.gov.hmrc.agentmtdidentifiers.model.Utr
 
 import scala.concurrent.Future
 
@@ -20,4 +21,9 @@ class $servicenamecamel$Controller @Inject() (
   def entities: Action[AnyContent] = Action.async { implicit request =>
     Future.successful(Ok(toJson($modelname$("hello world", None, None, None))))
   }
+
+  def entitiesByUtr(utr: Utr): Action[AnyContent] = Action.async { implicit request =>
+    Future.successful(Ok(toJson($modelname$(s"hello \$utr", None, None, None))))
+  }
+
 }

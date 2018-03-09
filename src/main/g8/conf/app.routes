@@ -1,4 +1,5 @@
 # microservice specific routes
 
 GET         /entities                       @$package$.controllers.$servicenamecamel$Controller.entities
+GET         /entities/:utr                  @$package$.controllers.$servicenamecamel$Controller.entitiesByUtr(utr:uk.gov.hmrc.agentmtdidentifiers.model.Utr)
 

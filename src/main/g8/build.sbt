@@ -17,8 +17,8 @@ lazy val scoverageSettings = {
 
 lazy val compileDeps = Seq(
   ws,
-  "uk.gov.hmrc" %% "bootstrap-play-25" % "1.3.0",
-  "uk.gov.hmrc" %% "auth-client" % "2.5.0",
+  "uk.gov.hmrc" %% "bootstrap-play-25" % "1.5.0",
+  "uk.gov.hmrc" %% "auth-client" % "2.6.0",
   "uk.gov.hmrc" %% "agent-mtd-identifiers" % "0.10.0",
   "de.threedimensions" %% "metrics-play" % "2.5.13",
   "uk.gov.hmrc" %% "domain" % "5.1.0",
@@ -56,7 +56,8 @@ lazy val root = (project in file("."))
     libraryDependencies ++= compileDeps ++ testDeps("test") ++ testDeps("it"),
     publishingSettings,
     scoverageSettings,
-    unmanagedResourceDirectories in Compile += baseDirectory.value / "resources"
+    unmanagedResourceDirectories in Compile += baseDirectory.value / "resources",
+    routesImport ++= Seq("$package$.binders.UrlBinders._")
   )
   .configs(IntegrationTest)
   .settings(
