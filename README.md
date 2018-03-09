@@ -7,14 +7,21 @@ A [Giter8](http://www.foundweekends.org/giter8/) template for creating HMRC Digi
 
 ## How to generate new microservice project:
 
+1. Install g8 commandline tool (http://www.foundweekends.org/giter8/setup.html)
 1. Locate to the directory where you want to create the template.
 2. Decide your service name :-) and do not add `Frontend` suffix.
-3. To create a project run the command (after tweaking param values):
+3. To create a frontend microservice run the command (after tweaking param values):
 
   ```
-  sbt new hmrc/agents-service-template.g8 -b [agents-frontend|agents-api] --servicename="Some Shiny Service" --serviceport=9999
+  g8 hmrc/agents-service-template.g8 -b agents-frontend --servicename="Some Shiny Service" --serviceport=9999
   ```
   
+4. To create a backend microservice run the command (after tweaking param values):
+
+  ```
+  g8 hmrc/agents-service-template.g8 -b agents-api --servicename="Some Shiny Service" --serviceport=9999 --mongodb=[false|true]
+  ```
+
 4. The new project folder will be created.
 5. Change working directory to the new one:
 
@@ -40,6 +47,12 @@ A [Giter8](http://www.foundweekends.org/giter8/) template for creating HMRC Digi
   ```
   sbt run
   ```
+  
+Known issues
+==
+
+* `sbt new` command uses old version of giter8 library (0.7.2), support for conditionals has been added in version 0.10.0, use `g8` command instead
+  
   
 ## Example frontend project layout
 
