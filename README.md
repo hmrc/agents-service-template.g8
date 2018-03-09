@@ -48,11 +48,19 @@ A [Giter8](http://www.foundweekends.org/giter8/) template for creating HMRC Digi
   sbt run
   ```
   
-Known issues
-==
+## Known issues
 
 * `sbt new` command uses old version of giter8 library (0.7.2), support for conditionals has been added in version 0.10.0, use `g8` command instead
   
+  
+## How to develop and test template itself?
+
+1. Checkout the right branch [agent-api|agent-frontend]
+2. Remember to use placeholders for names (see examples in existing code)
+3. Escape all string interpolation tokens in Scala: `\$` instead of `$` 
+4. Test template before pushing changes using `./test-*` scripts
+5. Always use latest dependencies, upgrade if needed
+6. All support and PRs kindly welcome!
   
 ## Example frontend project layout
 
