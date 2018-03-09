@@ -2,11 +2,12 @@ A [Giter8](http://www.foundweekends.org/giter8/) template for creating Scala Pla
 
 ## To create a template service:
 
+* Install g8 commandline tool (http://www.foundweekends.org/giter8/setup.html)
 * Locate to the directory where you want to create the template
 * Decide your service name :-) [do not add `Frontend` suffix]
-* To create a generic microservice run the command
+* To create a generic frontend microservice run the command
 
-  `sbt new hmrc/agents-service-template.g8 -b agents-frontend|agents-api --servicename="My Service Name"`
+  `g8 hmrc/agents-service-template.g8 -b agents-frontend --servicename="My Service Name"`
   
 * The new project folder will be created
 * Change working directory to the new one
@@ -15,11 +16,17 @@ A [Giter8](http://www.foundweekends.org/giter8/) template for creating Scala Pla
 
     `sbt test it:test`
     
-## Development
+Known issues
+==
 
-Test template while developing running script in the project root:
+* `sbt new` command uses old version of giter8 library (0.7.2), support for conditionals has been added in version 0.10.0
+  
+To test template itself  
+==
 
-    `./test-agents-frontend-template.sh`    
+* Run `./test-agents-frontend-template.sh` 
+
+Temporary services will be then created and tested in `target/sandbox/new-shiny-service-frontend/`.
 
 ## License
 
