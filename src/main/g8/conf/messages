@@ -10,6 +10,8 @@ global.error.500.heading=Sorry, we’re experiencing technical difficulties
 global.error.500.message=Please try again in a few minutes.
 
 # Validation errors
+error.prefix=Error:
+error.summary.heading=There is a problem
 error.postcode.invalid=You can only enter these characters: A-Z 0-9
 error.telephone.invalid=You can only enter these characters: 0-9 ( ) space
 error.string.invalid=You can only enter these characters: a-z A-Z 0-9 ,.() - ! @ space
@@ -18,6 +20,7 @@ error.email=Enter a valid email address
 
 # Service specific messages
 app.name=$servicename$
+servicename.titleSuffix=$servicename$ - GOV.UK
 
 # Start page
 start.title=$servicename$
@@ -30,13 +33,14 @@ start.helpdesklink.text2=if you need help.
 $formpath$.title=$servicename$ $formname$
 $formpath$.label=Enter your 1st parameter
 $formpath$.description=This could be random characters.
-$formpath$.parameter1.label=First parameter:
-$formpath$.telephoneNumber.label=Telephone number:
-$formpath$.emailAddress.label=Email address:
+$formpath$.parameter1.label=First parameter
+$formpath$.telephoneNumber.label=Telephone number
+$formpath$.emailAddress.label=Email address
 
 # Summary page
 summary.title=$servicename$ Summary
 summary.label=Check your answers
+summary.link.change=Edit
 summary.header.parameters=Parameters
 summary.header.contactDetails=Contact details
 summary.parameter1=Parameter1
@@ -44,3 +48,4 @@ summary.telephoneNumber=Telephone number:
 summary.emailAddress=Email address:
 
 button.continue=Continue
+button.submit=Submit

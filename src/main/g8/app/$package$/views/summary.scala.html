@@ -7,28 +7,42 @@
 
 @$package$.views.html.main_template(title = Messages("summary.title"), bodyClasses = None) {
 
-        <header class="page-header">
-            <h1>@Messages("summary.label")</h1>
-        </header>
+        <h1 class="heading-xlarge">@Messages("summary.label")</h1>
 
-        <div class="tabular-data__entry divider--bottom">
-            <span class="tabular-data__heading tabular-data__heading--label">@Messages("summary.header.parameters")</span>
-            <div class="tabular-data__data-1">
-                @Messages("summary.parameter1") @$formnamesmall$("parameter1").value
+
+        <dl class="govuk-check-your-answers cya-questions-short">
+            <div>
+                <dt class="cya-question">
+                    @Messages("summary.header.parameters")
+                </dt>
+                <dd class="cya-answer" id="parameter1">
+                    @$formnamesmall$("parameter1").value
+                </dd>
+                <dd class="cya-change">
+                    <a href="#">
+                      @Messages("summary.link.change")
+                      <span class="visuallyhidden">@Messages("summary.header.parameters")</span>
+                    </a>
+                </dd>
             </div>
-        </div>
-
-        <div class="tabular-data__entry divider--bottom">
-            <span class="tabular-data__heading tabular-data__heading--label">@Messages("summary.header.contactDetails")</span>
-            <div class="tabular-data__data-1">
-                  @Messages("summary.telephoneNumber") @$formnamesmall$("telephoneNumber").value
-                  <br>
-                  @Messages("summary.emailAddress") @$formnamesmall$("emailAddress").value
+            <div>
+                <dt class="cya-question">
+                    @Messages("summary.header.contactDetails")
+                </dt>
+                <dd class="cya-answer" id="contactDetails">
+                    @if($formnamesmall$("emailAddress").value){<span class="display-block">}@$formnamesmall$("emailAddress").value @if($formnamesmall$("emailAddress").value){</span>}
+                    @if($formnamesmall$("telephoneNumber").value){<span class="display-block">}@$formnamesmall$("telephoneNumber").value @if($formnamesmall$("telephoneNumber").value){</span>}
+                </dd>
+                <dd class="cya-change">
+                    <a href="#">
+                      @Messages("summary.link.change")
+                      <span class="visuallyhidden">@Messages("summary.header.contactDetails")</span>
+                    </a>
+                </dd>
             </div>
-        </div>
+        </dl>
 
-        <p>
-            <a class="button button-start button--get-started" name="start" href="@$servicenamecamel$Controller.start" role="button">Done</a>
-        </p>
+        <a href="#" class="button form-field--submit" href="@$servicenamecamel$Controller.start" role="button">@Messages("button.submit")</a>
+
 
 }
