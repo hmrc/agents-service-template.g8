@@ -19,6 +19,8 @@
     <meta name="format-detection" content="telephone=no"/>
 }
 
+@titleWithSuffix = @{ title + " - " + Messages("servicename.titleSuffix") }
+
 @headerNavLinks = {}
 
 @insideHeader = {
@@ -74,4 +76,4 @@
     sidebar = sidebar)
 }
 
-@hmrcGovUkTemplate(Some(title), bodyClasses)(head, bodyEnd, insideHeader, afterHeader, footerTop, Some(uiLayouts.footer_links()), nav = true)(content)
+@hmrcGovUkTemplate(Some(titleWithSuffix), bodyClasses)(head, bodyEnd, insideHeader, afterHeader, footerTop, Some(uiLayouts.footer_links()), nav = true)(content)

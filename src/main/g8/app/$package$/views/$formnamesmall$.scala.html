@@ -1,21 +1,23 @@
 @import play.api.Configuration
-
-@import uk.gov.hmrc.play.views.html.helpers.form
-@import uk.gov.hmrc.play.views.html.helpers.input
+@import uk.gov.hmrc.play.views.html.helpers.{form, input, errorSummary}
 
 @import $package$.controllers.routes.$servicenamecamel$Controller
 @import $package$.models.$modelname$
 
 @($formnamesmall$ : Form[$modelname$])(implicit request: Request[_], messages: Messages, config: Configuration)
 
-@$package$.views.html.main_template(title = Messages("$formpath$.title"), bodyClasses = None) {
+@$package$.views.html.main_template(title = error_prefix($formnamesmall$) + Messages("$formpath$.title"), bodyClasses = None) {
+
+
+@if($formnamesmall$.hasErrors){
+    @errorSummary(Messages("error.summary.heading"), $formnamesmall$, Seq.empty, Some("$formnamesmall$"))
+}
 
   @form(
     action = $servicenamecamel$Controller.$formnamesmall$,
     'class -> "form js-form") {
-    <header class="page-header">
-        <h1>@Messages("$formpath$.label")</h1>
-    </header>
+
+    <h1 class="heading-xlarge">@Messages("$formpath$.label")</h1>
 
     <p>@Messages("$formpath$.description")</p>
 
@@ -24,7 +26,7 @@
         $formnamesmall$("parameter1"),
         '_label -> Messages("$formpath$.parameter1.label"),
         '_inputClass -> "input--medium input--cleared",
-        '_labelClass -> "bold"
+        '_labelClass -> "heading-medium soft--ends"
       )
     </div>
 
@@ -33,7 +35,7 @@
             $formnamesmall$("emailAddress"),
             '_label -> Messages("$formpath$.emailAddress.label"),
             '_inputClass -> "input--medium input--cleared",
-            '_labelClass -> "bold"
+            '_labelClass -> "heading-medium soft--ends"
         )
     </div>
 
@@ -42,15 +44,14 @@
             $formnamesmall$("telephoneNumber"),
             '_label -> Messages("$formpath$.telephoneNumber.label"),
             '_inputClass -> "input--medium input--cleared",
-            '_labelClass -> "bold"
+            '_labelClass -> "heading-medium soft--ends"
         )
     </div>
 
     <input type="hidden" name="parameter2" id="parameter2" value="@$formnamesmall$("parameter2").value">
 
-    <div class="form-group">
-      <button class="button" type="submit" id="continue">@Messages("button.continue")</button>
-    </div>
+    <button class="button form-field--submit" type="submit" id="continue">@Messages("button.submit")</button>
+
   }
 
 }
