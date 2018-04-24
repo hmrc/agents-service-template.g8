@@ -23,7 +23,7 @@ lazy val compileDeps = Seq(
   "de.threedimensions" %% "metrics-play" % "2.5.13",
   "uk.gov.hmrc" %% "domain" % "5.1.0",
   "com.github.blemale" %% "scaffeine" % "2.5.0",
-  "uk.gov.hmrc" %% "agent-kenshoo-monitoring" % "2.4.0",
+  "uk.gov.hmrc" %% "agent-kenshoo-monitoring" % "3.0.1",
   $if(mongodb.truthy)$
     "uk.gov.hmrc" %% "play-reactivemongo" % "6.2.0",
   $endif$
