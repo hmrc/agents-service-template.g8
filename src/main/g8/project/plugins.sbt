@@ -5,7 +5,7 @@ resolvers ++= Seq(
   "Typesafe Releases" at "http://repo.typesafe.com/typesafe/releases/"
 )
 
-addSbtPlugin("uk.gov.hmrc" % "sbt-auto-build" % "1.7.0")
+addSbtPlugin("uk.gov.hmrc" % "sbt-auto-build" % "1.8.0")
 
 addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.5.12")
 
@@ -15,6 +15,5 @@ addSbtPlugin("uk.gov.hmrc" % "sbt-git-versioning" % "0.9.0")
 
 addSbtPlugin("org.scoverage" % "sbt-scoverage" % "1.5.0")
 
-addSbtPlugin("ch.epfl.scala" % "sbt-scalafix" % "0.5.3")
+addSbtPlugin("com.lucidchart" % "sbt-scalafmt" % "1.15")
 
-addSbtPlugin("org.scalariform" % "sbt-scalariform" % "1.8.2")
