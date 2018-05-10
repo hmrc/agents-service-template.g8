@@ -51,7 +51,9 @@
 
     <logger name="uk.gov.hmrc.audit" level="ERROR"/>
 
-    <logger name="uk.gov.hmrc.agentmapping.repository" level="ERROR"/>
+    <logger name="$package$" level="INFO"/>
+
+    <logger name="$package$.repository" level="ERROR"/>
 
     <logger name="akka" level="ERROR"/>
 
