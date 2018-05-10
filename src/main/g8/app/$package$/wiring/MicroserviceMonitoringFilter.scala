@@ -49,7 +49,7 @@ object KeyToPatternMappingFromRoutes {
             if (placeholders.contains(name)) s"{\$name}" else ":"
           } else p).mkString("|")
         val pattern = r.replace("\$", ":")
-        Logger.info(s"\$key-\$method -> \$pattern")
+        Logger(getClass).info(s"\$key-\$method -> \$pattern")
         (key, pattern)
       }
     }
@@ -69,7 +69,7 @@ abstract class MonitoringFilter(kenshooRegistry: MetricRegistry)(implicit ec: Ex
           nextFilter(requestHeader)
         }
       case None =>
-        Logger.debug(s"API-Not-Monitored: \${requestHeader.method}-\${requestHeader.uri}")
+        Logger(getClass).debug(s"API-Not-Monitored: \${requestHeader.method}-\${requestHeader.uri}")
         nextFilter(requestHeader)
     }
   }
