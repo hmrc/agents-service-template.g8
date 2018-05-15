@@ -34,10 +34,15 @@ class ErrorHandler @Inject() (
 
   override def resolveError(request: RequestHeader, exception: Throwable) = {
     auditServerError(request,exception)
+    implicit val r = Request(request, "")
     exception match {
       case _: NoActiveSession => toGGLogin(if (isDevEnv) s"http://\${request.host}\${request.uri}" else s"\${request.uri}")
       case _: InsufficientEnrolments => Forbidden
-      case _ => super.resolveError(request, exception)
+      case _ => Ok(standardErrorTemplate(
+        Messages("global.error.500.title"),
+        Messages("global.error.500.heading"),
+        Messages("global.error.500.message"))
+      )
     }
   }
 
