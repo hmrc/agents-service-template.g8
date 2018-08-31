@@ -51,7 +51,8 @@ lazy val root = (project in file("."))
     scoverageSettings,
     unmanagedResourceDirectories in Compile += baseDirectory.value / "resources",
     scalafmtOnCompile in Compile := true,
-    scalafmtOnCompile in Test := true
+    scalafmtOnCompile in Test := true,
+    majorVersion := 0
   )
   .configs(IntegrationTest)
   .settings(
@@ -62,7 +63,7 @@ lazy val root = (project in file("."))
     testGrouping in IntegrationTest := oneForkedJvmPerTest((definedTests in IntegrationTest).value),
     scalafmtOnCompile in IntegrationTest := true
   )
-  .enablePlugins(PlayScala, SbtAutoBuildPlugin, SbtGitVersioning, SbtDistributablesPlugin)
+  .enablePlugins(PlayScala, SbtAutoBuildPlugin, SbtGitVersioning, SbtDistributablesPlugin, SbtArtifactory)
 
 inConfig(IntegrationTest)(scalafmtCoreSettings)
 
