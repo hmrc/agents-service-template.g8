@@ -3,6 +3,8 @@
 
 A [Giter8](http://www.foundweekends.org/giter8/) template for creating HMRC Digital [Playframework](https://playframework.com/) microservices.
 
+##Code is seperated on different branches agents-api and agents-frontend
+
 !!! DO NOT MERGE BRANCHES TO MASTER !!!
 
 ## How to generate new microservice project:
