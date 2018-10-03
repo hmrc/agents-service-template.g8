@@ -50,6 +50,12 @@ A [Giter8](http://www.foundweekends.org/giter8/) template for creating HMRC Digi
   sbt run
   ```
   
+9. The coverege will pass as the switch is off in build.sbt, remember to switch it on for your actual code:
+
+  ```
+  ScoverageKeys.coverageFailOnMinimum := false
+  ```
+  
 ## Known issues
 
 * `sbt new` command uses old version of giter8 library (0.7.2), support for conditionals has been added in version 0.10.0, use `g8` command instead
