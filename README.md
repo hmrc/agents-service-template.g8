@@ -41,7 +41,7 @@ Temporary services will be then created and tested in `target/sandbox/new-shiny-
 Frontend template
 ==
 
-Frontend microservice template is hosted and developed on a separate stable branch `agents-frontend`
+Frontend microservice template is hosted and developed on [a separate stable`agents-frontend` branch](https://github.com/hmrc/agents-service-template.g8/tree/agents-frontend)
 
 Content
 ==
