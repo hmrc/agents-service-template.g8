@@ -34,7 +34,7 @@ Backend microservice template is hosted and developed on a `master` branch, plea
 Content
 ==
 
-Assuming param `--servicename="New Shiny Service With MongoDB"` the template will produce following files and directories:
+Assuming param `--servicename="New Shiny Service"` the template will produce following files and directories:
 
 ```
 .
