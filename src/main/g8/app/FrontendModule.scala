@@ -12,6 +12,9 @@ import uk.gov.hmrc.play.audit.http.HttpAuditing
 import uk.gov.hmrc.play.audit.http.connector.AuditConnector
 import uk.gov.hmrc.play.config.ServicesConfig
 import uk.gov.hmrc.play.http.ws.WSHttp
+import com.typesafe.config.Config
+import play.api.Configuration
+import akka.actor.ActorSystem
 
 class FrontendModule(val environment: Environment, val configuration: Configuration) extends AbstractModule with ServicesConfig {
 
@@ -19,7 +22,6 @@ class FrontendModule(val environment: Environment, val configuration: Configurat
   override protected def mode = environment.mode
 
   def configure(): Unit = {
-
     val appName = "$servicenamehyphen$"
 
     val loggerDateFormat: Option[String] = configuration.getString("logger.json.dateformat")
@@ -97,11 +99,22 @@ class FrontendModule(val environment: Environment, val configuration: Configurat
       }
     }
   }
+
 }
 
 @Singleton
-class HttpVerbs @Inject() (val auditConnector: AuditConnector, @Named("appName") val appName: String)
-  extends HttpGet with HttpPost with HttpPut with HttpPatch with HttpDelete with WSHttp
-  with HttpAuditing {
+class HttpVerbs @Inject()(
+   val auditConnector: AuditConnector,
+   @Named("appName") val appName: String,
+   val config: Configuration,
+   val actorSystem: ActorSystem)
+  extends HttpGet
+    with HttpPost
+    with HttpPut
+    with HttpPatch
+    with HttpDelete
+    with WSHttp
+    with HttpAuditing {
   override val hooks = Seq(AuditingHook)
+  override protected def configuration: Option[Config] = Some(config.underlying)
 }

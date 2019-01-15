@@ -10,7 +10,7 @@ import uk.gov.hmrc.http.HeaderCarrier
 import uk.gov.hmrc.play.audit.AuditExtensions._
 import uk.gov.hmrc.play.audit.http.connector.AuditConnector
 import uk.gov.hmrc.play.audit.model.DataEvent
-import uk.gov.hmrc.play.http.logging.MdcLoggingExecutionContext._
+import scala.concurrent.ExecutionContext
 
 import scala.concurrent.Future
 import scala.util.Try
@@ -25,7 +25,7 @@ class AuditService @Inject() (val auditConnector: AuditConnector) {
 
   import $servicenamecamel$Event._
 
-  def send$servicenamecamel$SomethingHappened(model: $modelname$, agentReference: Arn)(implicit hc: HeaderCarrier, request: Request[Any]): Unit = {
+  def send$servicenamecamel$SomethingHappened(model: $modelname$, agentReference: Arn)(implicit hc: HeaderCarrier, request: Request[Any], ec: ExecutionContext): Unit = {
 
     auditEvent($servicenamecamel$Event.$servicenamecamel$SomethingHappened, "$servicenamehyphen$-something-happened",
       Seq(
@@ -35,11 +35,11 @@ class AuditService @Inject() (val auditConnector: AuditConnector) {
         "emailAddress" -> model.emailAddress.getOrElse("")))
   }
 
-  private[services] def auditEvent(event: $servicenamecamel$Event, transactionName: String, details: Seq[(String, Any)] = Seq.empty)(implicit hc: HeaderCarrier, request: Request[Any]): Future[Unit] = {
+  private[services] def auditEvent(event: $servicenamecamel$Event, transactionName: String, details: Seq[(String, Any)] = Seq.empty)(implicit hc: HeaderCarrier, request: Request[Any], ec: ExecutionContext): Future[Unit] = {
     send(createEvent(event, transactionName, details: _*))
   }
 
-  private[services] def createEvent(event: $servicenamecamel$Event, transactionName: String, details: (String, Any)*)(implicit hc: HeaderCarrier, request: Request[Any]): DataEvent = {
+  private[services] def createEvent(event: $servicenamecamel$Event, transactionName: String, details: (String, Any)*)(implicit hc: HeaderCarrier, request: Request[Any], ec: ExecutionContext): DataEvent = {
 
     val detail = hc.toAuditDetails(details.map(pair => pair._1 -> pair._2.toString): _*)
     val tags = hc.toAuditTags(transactionName, request.path)
@@ -50,7 +50,7 @@ class AuditService @Inject() (val auditConnector: AuditConnector) {
       detail = detail)
   }
 
-  private[services] def send(events: DataEvent*)(implicit hc: HeaderCarrier): Future[Unit] = {
+  private[services] def send(events: DataEvent*)(implicit hc: HeaderCarrier, ec: ExecutionContext): Future[Unit] = {
     Future {
       events.foreach { event =>
         Try(auditConnector.sendEvent(event))
