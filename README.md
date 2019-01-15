@@ -38,6 +38,11 @@ To test template itself
 
 Temporary services will be then created and tested in `target/sandbox/new-shiny-service/` and `target/sandbox/new-shiny-service-with-mongodb/`
 
+Frontend template
+==
+
+Frontend microservice template is hosted and developed on a separate stable branch `agents-frontend`
+
 ## License
 
 This code is open source software licensed under the [Apache 2.0 License]("http://www.apache.org/licenses/LICENSE-2.0.html").
