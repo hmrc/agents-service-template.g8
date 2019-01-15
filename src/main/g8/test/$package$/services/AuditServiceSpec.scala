@@ -40,7 +40,7 @@ class AuditServiceSpec extends UnitSpec with MockitoSugar with Eventually {
         telephoneNumber = Some("12313"),
         emailAddress = Some("john.smith@email.com"))
 
-      await(service.send$servicenamecamel$SomethingHappened(model, Arn("ARN0001"))(hc, FakeRequest("GET", "/path")))
+      await(service.send$servicenamecamel$SomethingHappened(model, Arn("ARN0001"))(hc, FakeRequest("GET", "/path"), ExecutionContext.Implicits.global))
 
       eventually {
         val captor = ArgumentCaptor.forClass(classOf[DataEvent])
@@ -53,9 +53,6 @@ class AuditServiceSpec extends UnitSpec with MockitoSugar with Eventually {
         sentEvent.detail("parameter1") shouldBe "John Smith"
         sentEvent.detail("telephoneNumber") shouldBe "12313"
         sentEvent.detail("emailAddress") shouldBe "john.smith@email.com"
-
-        sentEvent.tags.contains("Authorization") shouldBe false
-        sentEvent.detail("Authorization") shouldBe "dummy bearer token"
 
         sentEvent.tags("transactionName") shouldBe "$servicenamehyphen$-something-happened"
         sentEvent.tags("path") shouldBe "/path"
