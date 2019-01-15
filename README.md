@@ -43,6 +43,80 @@ Frontend template
 
 Frontend microservice template is hosted and developed on a separate stable branch `agents-frontend`
 
+Content
+==
+
+Assuming param `--servicename="New Shiny Service With MongoDB"` the template will produce following files and directories:
+
+```
+.
+├── README.md
+├── app
+│   ├── MicroserviceModule.scala
+│   └── uk
+│       └── gov
+│           └── hmrc
+│               └── newshinyservicewithmongodb
+│                   ├── binders
+│                   │   ├── SimpleObjectBinder.scala
+│                   │   └── UrlBinders.scala
+│                   ├── connectors
+│                   │   └── MicroserviceAuthConnector.scala
+│                   ├── controllers
+│                   │   ├── AuthActions.scala
+│                   │   └── NewShinyServiceWithMongodbController.scala
+│                   ├── models
+│                   │   └── NewShinyServiceWithMongodbModel.scala
+│                   ├── repository
+│                   │   ├── NewShinyServiceWithMongodbRepository.scala
+│                   │   └── StrictlyEnsureIndexes.scala
+│                   ├── services
+│                   │   └── AuditService.scala
+│                   └── wiring
+│                       ├── MicroserviceFilters.scala
+│                       └── MicroserviceMonitoringFilter.scala
+├── build.sbt
+├── conf
+│   ├── app.routes
+│   ├── application-json-logger.xml
+│   ├── application.conf
+│   ├── logback.xml
+│   └── prod.routes
+├── it
+│   └── uk
+│       └── gov
+│           └── hmrc
+│               └── newshinyservicewithmongodb
+│                   ├── controllers
+│                   │   ├── AuthActionsISpec.scala
+│                   │   └── NewShinyServiceWithMongodbControllerISpec.scala
+│                   ├── repository
+│                   │   └── NewShinyServiceWithMongodbRepositoryISpec.scala
+│                   ├── stubs
+│                   │   ├── AuthStubs.scala
+│                   │   └── DataStreamStubs.scala
+│                   └── support
+│                       ├── AppBaseISpec.scala
+│                       ├── BaseISpec.scala
+│                       ├── JsonMatchers.scala
+│                       ├── MetricsTestSupport.scala
+│                       ├── MongoApp.scala
+│                       ├── ServerBaseISpec.scala
+│                       ├── WSResponseMatchers.scala
+│                       └── WireMockSupport.scala
+├── project
+│   ├── build.properties
+│   ├── plugins.sbt
+│   └── project
+└── test
+    └── uk
+        └── gov
+            └── hmrc
+                └── newshinyservicewithmongodb
+                    └── services
+                        └── AuditServiceSpec.scala
+```
+
 ## License
 
 This code is open source software licensed under the [Apache 2.0 License]("http://www.apache.org/licenses/LICENSE-2.0.html").

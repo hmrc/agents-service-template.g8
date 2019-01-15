@@ -12,7 +12,7 @@
 
 ## Running the app locally
 
-    sm --start AGENT_MTD -f
+    sm --start AGENTS_STUBS $servicename;format="upper,snake"$ -f
     sm --stop $servicename;format="upper,snake"$
     sbt run
 
