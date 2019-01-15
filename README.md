@@ -8,11 +8,15 @@ To create a template service:
 * Decide your service name :-)
 * To create a generic microservice run the command
 
-  `g8 hmrc/agents-service-template.g8 -b agents-api --servicename="My Service Name" --mongodb=false`
+  `g8 hmrc/agents-service-template.g8 --servicename="My Service Name" --mongodb=false`
   
 * To create a generic microservice with MongoDB run the command
 
-  `g8 hmrc/agents-service-template.g8 -b agents-api --servicename="My Service Name" --mongodb=true`
+  `g8 hmrc/agents-service-template.g8 --servicename="My Service Name" --mongodb=true`
+  
+* To create a generic *frontend* microservice run the command
+  
+   `g8 hmrc/agents-service-template.g8 -b agents-frontend --servicename="My Service Name"`
   
 * The new project folder will be created
 * Change working directory to the new one
