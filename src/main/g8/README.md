@@ -12,8 +12,7 @@
 
 ## Running the app locally
 
-    sm --start AGENT_MTD -f
-    sm --stop $servicename;format="upper,snake"$_FRONTEND
+    sm --start AGENTS_STUBS -f
     sbt run
 
 It should then be listening on port $serviceport$
