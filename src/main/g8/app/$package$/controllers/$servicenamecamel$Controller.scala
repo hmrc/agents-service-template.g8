@@ -1,6 +1,6 @@
 package $package$.controllers
 
-import javax.inject.{ Inject, Singleton, Provider}
+import javax.inject.{ Inject, Singleton}
 
 import play.api.data.Form
 import play.api.data.Forms._
@@ -19,11 +19,8 @@ class $servicenamecamel$Controller @Inject() (
   override val messagesApi: MessagesApi,
   $backendservicenamesmall$Connector: $backendservicenamecamel$Connector,
   val authConnector: FrontendAuthConnector,
-  val env: Environment,
-  ecp: Provider[ExecutionContext])(implicit val configuration: Configuration)
+  val env: Environment)(implicit val configuration: Configuration, ec: ExecutionContext)
   extends FrontendController with I18nSupport with AuthActions {
-
-  implicit val ec: ExecutionContext = ecp.get
 
   import $servicenamecamel$Controller._
 
