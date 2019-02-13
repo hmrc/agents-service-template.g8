@@ -1,6 +1,6 @@
 package $package$.controllers
 
-import javax.inject.{ Inject, Singleton, Provider}
+import javax.inject.{ Inject, Singleton}
 
 import play.api.libs.json.Json.toJson
 import play.api.mvc._
@@ -15,11 +15,8 @@ import scala.concurrent.{ExecutionContext, Future}
 @Singleton
 class $servicenamecamel$Controller @Inject() (
   val authConnector: MicroserviceAuthConnector,
-  val env: Environment,
-  ecp: Provider[ExecutionContext])(implicit val configuration: Configuration)
+  val env: Environment)(implicit val configuration: Configuration, ec: ExecutionContext)
   extends BaseController with AuthActions {
-
-  implicit val ec: ExecutionContext = ecp.get
 
   def entities: Action[AnyContent] = Action.async { implicit request =>
     Future.successful(Ok(toJson($modelname$("hello world", None, None, None))))
